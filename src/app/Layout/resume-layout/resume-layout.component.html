@@ -1,0 +1,8 @@
+<app-header></app-header>
+<!-- <app-stepper></app-stepper> -->
+<app-stepper [steps]="steps" [current]="step" (stepChange)="goToStep($event)">
+</app-stepper>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

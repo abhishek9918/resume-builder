@@ -1,0 +1,67 @@
+<!-- <section
+  class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white rounded-xl shadow-xl font-montserrat mt-4"
+>
+  <form [formGroup]="resumeFormGroup" (ngSubmit)="submit()">
+    <ng-container [ngSwitch]="step">
+      <app-basic-info
+        *ngSwitchCase="0"
+        [parentForm]="resumeFormGroup"
+      ></app-basic-info>
+      <app-experience
+        *ngSwitchCase="1"
+        [parentForm]="resumeFormGroup"
+      ></app-experience>
+      <app-education
+        *ngSwitchCase="2"
+        [parentForm]="resumeFormGroup"
+      ></app-education>
+
+      <app-skills *ngSwitchCase="3" [parentForm]="resumeFormGroup"></app-skills>
+      <app-projects
+        *ngSwitchCase="4"
+        [parentForm]="resumeFormGroup"
+      ></app-projects>
+      <app-languages
+        *ngSwitchCase="5"
+        [languagesArray]="languagesArray"
+      ></app-languages>
+      <app-hobbies
+        *ngSwitchCase="6"
+        [parentForm]="resumeFormGroup"
+      ></app-hobbies>
+      <app-preview-template *ngSwitchCase="7"></app-preview-template>
+    </ng-container>
+    <div class="flex justify-between mt-6">
+      <button
+        type="button"
+        *ngIf="step > 0"
+        (click)="prevStep()"
+        class="nav-btn bg-gray-200 text-slate-700 hover:bg-gray-300"
+      >
+        ← Previous
+      </button>
+      <button
+        type="button"
+        *ngIf="step < 7"
+        (click)="nextStep()"
+        class="nav-btn bg-emerald-700 text-white hover:bg-emerald-800"
+      >
+        Next →
+      </button>
+      <button
+        type="submit"
+        *ngIf="step === 7"
+        class="nav-btn bg-blue-700 text-white hover:bg-blue-800"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</section> -->
+
+<!-- OPTIONAL WRAPPER IF YOU NEED COMMON FORMGROUP CONTEXT -->
+<div
+  class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white rounded-xl shadow-xl font-montserrat mt-4"
+>
+  <router-outlet></router-outlet>
+</div>

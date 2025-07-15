@@ -1,0 +1,42 @@
+<div class="">
+  <ol class="flex items-center justify-center gap-4 select-none">
+    <ng-container *ngFor="let label of steps; let i = index">
+      <li
+        class="flex flex-col items-center text-center cursor-pointer group transition-all duration-300 ease-in-out"
+        [class.text-emerald-600]="i <= current"
+        (click)="stepChange.emit(i)"
+      >
+        <span
+          class="w-10 h-10 flex items-center justify-center rounded-full border-2 text-sm font-bold shadow-md transition-all duration-500 transform group-hover:scale-105"
+          [ngClass]="{
+            'bg-emerald-600 border-emerald-600 text-white scale-105':
+              i < current,
+            'bg-white border-emerald-500 text-emerald-600': i === current,
+            'bg-gray-100 border-gray-300 text-gray-400': i > current
+          }"
+        >
+          {{ i + 1 }}
+        </span>
+
+        <span
+          class="mt-1 text-sm font-medium tracking-wide transition-all duration-300"
+          [ngClass]="{
+            'text-emerald-600': i <= current,
+            'text-gray-400': i > current
+          }"
+        >
+          {{ label }}
+        </span>
+      </li>
+
+      <li
+        *ngIf="i < steps.length - 1"
+        class="h-1 w-10 md:w-14 rounded transition-all duration-500 ease-in-out"
+        [ngClass]="{
+          'bg-emerald-500': i < current,
+          'bg-gray-300': i >= current
+        }"
+      ></li>
+    </ng-container>
+  </ol>
+</div>

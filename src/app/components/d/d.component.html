@@ -1,0 +1,258 @@
+<!-- <app-stepper
+  [steps]="['Basic', 'Experience', 'Education', 'Skills', 'Preview']"
+  [current]="step"
+  (stepChange)="goToStep($event)"
+>
+</app-stepper> -->
+
+<!-- <section
+  class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white rounded-xl shadow-xl font-montserrat"
+>
+  <h2 class="main-heading">
+    Basic Information
+  </h2>
+  <form [formGroup]="resumeFormGroup" (ngSubmit)="submit()">
+    <app-basic-info></app-basic-info>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2"
+          >Full Name</label
+        >
+        <input
+          type="text"
+          formControlName="fullName"
+          placeholder="John Doe"
+          class="input-field"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2"
+          >Job Title</label
+        >
+        <input
+          type="text"
+          formControlName="jobTitle"
+          placeholder="Software Developer"
+          class="input-field"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2"
+          >Email</label
+        >
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="john.doe@example.com"
+          class="input-field"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2"
+          >Phone</label
+        >
+        <input
+          type="tel"
+          formControlName="phone"
+          placeholder="+91 1234567890"
+          class="input-field"
+        />
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm font-semibold text-slate-700 mb-2"
+          >Summary</label
+        >
+        <textarea
+          rows="4"
+          formControlName="summary"
+          placeholder="A passionate software developer with expertise in Angular and Node.js..."
+          class="input-field"
+        ></textarea>
+      </div>
+    </div>
+    <h2
+      class="main-heading"
+    >
+      Experience
+    </h2>
+    <ng-container formArrayName="experiences">
+      <ng-container
+        *ngFor="let experience of experiences.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <div class="space-y-6 mb-8">
+            <div
+              class="p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm"
+            >
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2"
+                    >Company</label
+                  >
+                  <input
+                    type="text"
+                    formControlName="company"
+                    placeholder="Tech Corp"
+                    class="input-field"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2"
+                    >Position</label
+                  >
+                  <input
+                    formControlName="position"
+                    type="text"
+                    placeholder="Senior Developer"
+                    class="input-field"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2"
+                    >Start Date</label
+                  >
+                  <input
+                    formControlName="startDate"
+                    type="date"
+                    class="input-field"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2"
+                    >End Date</label
+                  >
+                  <input
+                    formControlName="endDate"
+                    type="date"
+                    class="input-field"
+                  />
+                </div>
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-semibold text-slate-700 mb-2"
+                    >Summary / Achievements</label
+                  >
+                  <textarea
+                    formControlName="description"
+                    rows="3"
+                    placeholder="Led a team of developers to build scalable web applications..."
+                    class="input-field"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <h2
+      class="main-heading"
+    >
+      Education
+    </h2>
+    <ng-container formArrayName="educations">
+      <ng-container
+        *ngFor="let education of educations.controls; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <div
+            class="p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm mb-8"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Institution</label
+                >
+                <input
+                  formControlName="institution"
+                  type="text"
+                  placeholder="University of XYZ"
+                  class="input-field"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Degree</label
+                >
+                <input
+                  formControlName="degree"
+                  type="text"
+                  placeholder="B.Tech, Computer Science"
+                  class="input-field"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Start Date</label
+                >
+                <input
+                  formControlName="startDate"
+                  type="date"
+                  class="input-field"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >End Date</label
+                >
+                <input
+                  formControlName="endDate"
+                  type="date"
+                  class="input-field"
+                />
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <h2
+      class="main-heading"
+    >
+      Skills
+    </h2>
+
+    <div class="mb-12">
+      <label class="block text-sm font-semibold text-slate-700 mb-2"
+        >Add Skills (comma separated)</label
+      >
+      <tag-input
+        formControlName="skills"
+        [modelAsStrings]="true"
+        [separatorKeyCodes]="[13, 188, 9]"
+        placeholder="Type a skill and press Enter"
+        [trimTags]="true"
+        [addOnPaste]="true"
+        [removable]="true"
+      />
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <button class="nav-btn bg-gray-200 text-slate-700 hover:bg-gray-300">
+        ← Previous
+      </button>
+      <button
+        class="nav-btn bg-gradient-to-r from-blue-950 to-emerald-800 text-white hover:from-blue-900 hover:to-emerald-900"
+      >
+        Next →
+      </button>
+    </div>
+  </form>
+</section> -->
+
+<!-- <div>
+  @if (step===0) {
+  <div>1</div>
+  }
+   @else if (step===1) {
+  <div>2</div>
+  } 
+  @else if (step===2) {
+  <div>3</div>
+  } @else if (step===3) {
+  <div>4</div>
+  } @else if(step===4) {
+  <div>5</div>
+  }
+</div> -->

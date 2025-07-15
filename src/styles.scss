@@ -1,0 +1,71 @@
+@use "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.input-field {
+  @apply block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm shadow-sm 
+           focus:ring-2 focus:ring-emerald-300 focus:border-emerald-300 transition duration-200 
+           hover:shadow-md;
+}
+
+.nav-btn {
+  @apply px-6 py-2 rounded-lg transition duration-200 transform hover:scale-105;
+}
+
+.active {
+  @apply text-emerald-300 scale-105;
+}
+
+.active span {
+  @apply w-full; /* Makes the bottom underline visible */
+}
+
+@layer components {
+  .nav-btn {
+    @apply px-4 py-2 rounded-md transition hover:scale-105 disabled:opacity-40;
+  }
+}
+
+/* styles.scss */
+@layer components {
+  .input-field {
+    @apply block w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm shadow-sm
+           focus:ring-2 focus:ring-emerald-300 focus:border-emerald-300 transition duration-200
+           hover:shadow-md;
+  }
+}
+
+/* styles.scss or component.scss */
+.btn-primary {
+  @apply flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-blue-950 to-emerald-800 text-white rounded-lg shadow-md hover:bg-emerald-900 hover:shadow-lg transition-transform hover:scale-105;
+}
+
+.btn-danger {
+  @apply flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg shadow-md hover:bg-red-700 hover:shadow-lg transition-transform hover:scale-105;
+}
+
+// @layer components {
+//   .main-heading {
+//     @apply text-2xl sm:text-3xl font-bold text-blue-950 mb-6 animate-fade-in;
+//   }
+//   /* If you need animations */
+//   @keyframes fade-in {
+//     from {
+//       opacity: 0;
+//     }
+//     to {
+//       opacity: 1;
+//     }
+//   }
+//   .animate-fade-in {
+//     animation: fade-in 1s ease-in-out;
+//   }
+// }
+
+.sticky-stepper {
+  transition: all 0.3s ease-in-out;
+}

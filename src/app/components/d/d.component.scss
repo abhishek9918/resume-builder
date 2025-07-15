@@ -1,0 +1,89 @@
+// <!-- <div [formGroup]="parentForm">
+//   <div class="mb-6">
+//     <div class="flex items-center justify-between mb-2 pl-2">
+//       <h2 class="text-2xl sm:text-3xl font-bold text-blue-950 animate-fade-in">
+//         Tell us about your education
+//       </h2>
+
+//       <button type="button" (click)="addNewEducations()" class="btn-primary">
+//         <fa-icon [icon]="faPlus"></fa-icon>
+//       </button>
+//     </div>
+
+//     <p class="text-[#0f4c9f] text-sm">
+//       Enter your education experience so far, even if you are a current student
+//       or did not graduate.
+//     </p>
+//   </div>
+//   <ng-container formArrayName="educationsArray">
+//     <ng-container
+//       *ngFor="let education of educationsArray.controls; let i = index"
+//     >
+//       <ng-container [formGroupName]="i">
+//         <div class="mb-4">
+//           <div class="flex items-center justify-between mb-2 pl-2">
+//             <div class="flex gap-2">
+//               <button
+//                 *ngIf="i > 0"
+//                 type="button"
+//                 (click)="removeEducation(i)"
+//                 class="btn-danger"
+//               >
+//                 <fa-icon [icon]="faMinus"></fa-icon>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div
+//           class="p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm mb-8"
+//         >
+//           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+//             <div>
+//               <label class="block text-sm font-semibold text-slate-700 mb-2"
+//                 >Institution</label
+//               >
+//               <input
+//                 formControlName="institution"
+//                 type="text"
+//                 placeholder="University of XYZ"
+//                 class="input-field"
+//               />
+//             </div>
+//             <div>
+//               <label class="block text-sm font-semibold text-slate-700 mb-2"
+//                 >Degree</label
+//               >
+//               <input
+//                 formControlName="degree"
+//                 type="text"
+//                 placeholder="B.Tech, Computer Science"
+//                 class="input-field"
+//               />
+//             </div>
+//             <div>
+//               <label class="block text-sm font-semibold text-slate-700 mb-2"
+//                 >Start Date</label
+//               >
+//               <input
+//                 formControlName="startDate"
+//                 type="date"
+//                 class="input-field"
+//               />
+//             </div>
+//             <div>
+//               <label class="block text-sm font-semibold text-slate-700 mb-2"
+//                 >End Date</label
+//               >
+//               <input
+//                 formControlName="endDate"
+//                 type="date"
+//                 class="input-field"
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </ng-container>
+//     </ng-container>
+//   </ng-container>
+// </div> -->

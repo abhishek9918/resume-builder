@@ -1,0 +1,106 @@
+<!-- <h2 class="main-heading">
+  Experience
+</h2> -->
+
+<div [formGroup]="parentForm">
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb- pl-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-blue-950 animate-fade-in">
+        Tell us about your most recent job
+      </h2>
+      <button
+        type="button"
+        (click)="addExperience()"
+        aria-label="Add education"
+        class="btn-primary"
+      >
+        <fa-icon [icon]="faPlus"></fa-icon>Add
+      </button>
+    </div>
+    <p class="text-[#0f4c9f] text-sm pl-2">
+      Think volunteer work or impactful projects—start with your most recent.
+      Everything counts!
+    </p>
+  </div>
+
+  <ng-container formArrayName="experiencesArray">
+    <ng-container
+      *ngFor="let experience of experiencesArray.controls; let i = index"
+    >
+      <ng-container [formGroupName]="i">
+        <div class="space-y-6 mb-8">
+          <div
+            class="p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Company</label
+                >
+                <input
+                  type="text"
+                  formControlName="company"
+                  placeholder="Tech Corp"
+                  class="input-field"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Position</label
+                >
+                <input
+                  formControlName="position"
+                  type="text"
+                  placeholder="Senior Developer"
+                  class="input-field"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Start Date</label
+                >
+                <input
+                  formControlName="startDate"
+                  type="date"
+                  class="input-field"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >End Date</label
+                >
+                <input
+                  formControlName="endDate"
+                  type="date"
+                  class="input-field"
+                />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-semibold text-slate-700 mb-2"
+                  >Summary / Achievements</label
+                >
+                <textarea
+                  formControlName="description"
+                  rows="3"
+                  placeholder="Led a team of developers to build scalable web applications..."
+                  class="input-field"
+                ></textarea>
+              </div>
+            </div>
+            <div class="mt-6 text-right" *ngIf="i > 0">
+              <button
+                type="button"
+                (click)="removeExperience(i)"
+                class="btn-danger"
+                aria-label="Remove education"
+              >
+                <fa-icon [icon]="faMinus" class="mr-1"></fa-icon>
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

@@ -1,0 +1,72 @@
+<div [formGroup]="parentForm">
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-2 pl-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-blue-950 animate-fade-in">
+        Projects
+      </h2>
+      <button
+        type="button"
+        (click)="addNewEducations()"
+        aria-label="Add education"
+        class="btn-primary"
+      >
+        <fa-icon [icon]="faPlus"></fa-icon>Add
+      </button>
+    </div>
+    <p class="text-[#0f4c9f] text-sm pl-2">
+      Enter your education experience so far, even if you are a current student
+      or did not graduate.
+    </p>
+  </div>
+
+  <ng-container formArrayName="projectsArray">
+    <ng-container *ngFor="let project of projectsArray.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <div
+          class="mb-6 p-6 rounded-xl bg-slate-50 border border-slate-200 shadow-sm"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="input-label">Project Title</label>
+              <input
+                type="text"
+                formControlName="title"
+                class="input-field"
+                placeholder="e.g. Portfolio Website"
+              />
+            </div>
+            <div>
+              <label class="input-label">Duration</label>
+              <input
+                type="text"
+                formControlName="duration"
+                class="input-field"
+                placeholder="e.g. Jan 2023 - Mar 2023"
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label class="input-label">Description</label>
+              <textarea
+                formControlName="description"
+                rows="3"
+                class="input-field"
+                placeholder="Describe your project, tech stack used, your role etc."
+              ></textarea>
+            </div>
+          </div>
+          <div class="mt-6 text-right" *ngIf="i > 0">
+            <button
+              type="button"
+              (click)="removeProjects(i)"
+              class="btn-danger"
+              aria-label="Remove education"
+            >
+              <fa-icon [icon]="faMinus" class="mr-1"></fa-icon>
+              Remove
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
