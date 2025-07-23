@@ -22,7 +22,6 @@ import { PreviewTemplateComponent } from '../preview-template/preview-template.c
 import { ProjectsComponent } from '../steps/projects/projects.component';
 import { LanguagesComponent } from '../steps/languages/languages.component';
 import { HobbiesComponent } from '../steps/hobbies/hobbies.component';
-// import { RouterOutlet } from '../../../../node_modules/@angular/router/router_module.d-Bx9ArA6K';
 
 @Component({
   selector: 'app-resume-form-component',
@@ -31,20 +30,32 @@ import { HobbiesComponent } from '../steps/hobbies/hobbies.component';
     CommonModule,
     ReactiveFormsModule,
     TagInputModule,
-    // BasicInfoComponent,
-    // ExperienceComponent,
-    // EducationComponent,
-    // SkillsComponent,
-    // PreviewTemplateComponent,
-    // ProjectsComponent,
-    // LanguagesComponent,
-    // HobbiesComponent,
-    RouterOutlet,
+    BasicInfoComponent,
+    ExperienceComponent,
+    EducationComponent,
+    SkillsComponent,
+    PreviewTemplateComponent,
+    ProjectsComponent,
+    LanguagesComponent,
+    HobbiesComponent,
+    StepperComponent,
   ],
   templateUrl: './resume-form-component.component.html',
   styleUrl: './resume-form-component.component.scss',
 })
 export class ResumeFormComponentComponent implements OnInit {
+  currentStep = 0;
+  maxStepReached = 0;
+  steps = [
+    'Basic',
+    'Experience',
+    'Education',
+    'Skills',
+    'Projects',
+    'Languages',
+    'Hobbies',
+    'Preview',
+  ];
   resumeFormGroup!: FormGroup;
 
   constructor(private _fb: FormBuilder, private _router: Router) {}
@@ -124,26 +135,48 @@ export class ResumeFormComponentComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.resumeFormGroup.value);
-    if (this.resumeFormGroup.valid) {
-      console.log(this.resumeFormGroup.value);
-      this._router.navigate(['/preview']);
-    } else {
-      console.warn('Form invalid');
-      this.resumeFormGroup.markAllAsTouched();
-    }
+    this._router.navigate(['/final']);
+    // console.log(this.resumeFormGroup.value);
+    // if (this.resumeFormGroup.valid) {
+    //   console.log(this.resumeFormGroup.value);
+    //   // this._router.navigate(['/preview']);
+    // } else {
+    //   console.warn('Form invalid');
+    //   this.resumeFormGroup.markAllAsTouched();
+    // }
   }
 
-  step = 0;
+  step = 7;
 
   goToStep(index: number) {
     this.step = index;
+    console.log();
   }
 
-  nextStep() {
-    this.goToStep(this.step + 1);
+  // onStepChange(step: number) {
+  //   this.currentStep = step;
+  // }
+  onStepChange(step: number) {
+    if (step <= this.maxStepReached) {
+      this.step = step;
+      this.currentStep = step;
+    }
   }
-  prevStep() {
-    this.goToStep(this.step - 1);
+
+  next() {
+    if (this.step < this.steps.length - 1) {
+      this.step++;
+      this.currentStep = this.step;
+      if (this.step > this.maxStepReached) {
+        this.maxStepReached = this.step;
+      }
+    }
+  }
+
+  prev() {
+    if (this.step > 0) {
+      this.step--;
+      this.currentStep = this.step;
+    }
   }
 }

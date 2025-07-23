@@ -1,0 +1,7 @@
+.bg {
+  @apply .bg-emerald-300 m-4 p-4;
+}
+/* app.component.css */
+div[appBlur] {
+  transition: filter 0.3s ease;
+}

@@ -4,13 +4,15 @@ import { ResumeFormComponentComponent } from './components/resume-form-component
 import { HeaderComponent } from './core/shared/header/header.component';
 import { StepperComponent } from './core/shared/stepper/stepper.component';
 import { ResumeLayoutComponent } from './Layout/resume-layout/resume-layout.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 // import { RouterOutlet } from '../../node_modules/@angular/router/router_module.d-Bx9ArA6K';
 // import {   } from "../../node_modules/@angular/router/router_module.d-Bx9ArA6K";
 
 @Component({
   selector: 'app-root',
   // imports: [HeaderComponent, RouterOutlet, ResumeLayoutComponent],
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

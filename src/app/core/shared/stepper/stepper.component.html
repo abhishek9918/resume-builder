@@ -1,42 +1,33 @@
-<div class="">
-  <ol class="flex items-center justify-center gap-4 select-none">
-    <ng-container *ngFor="let label of steps; let i = index">
-      <li
-        class="flex flex-col items-center text-center cursor-pointer group transition-all duration-300 ease-in-out"
-        [class.text-emerald-600]="i <= current"
-        (click)="stepChange.emit(i)"
-      >
-        <span
-          class="w-10 h-10 flex items-center justify-center rounded-full border-2 text-sm font-bold shadow-md transition-all duration-500 transform group-hover:scale-105"
-          [ngClass]="{
-            'bg-emerald-600 border-emerald-600 text-white scale-105':
-              i < current,
-            'bg-white border-emerald-500 text-emerald-600': i === current,
-            'bg-gray-100 border-gray-300 text-gray-400': i > current
-          }"
-        >
-          {{ i + 1 }}
-        </span>
+<div class="flex flex-col items-center">
+  <div class="relative w-[60vw] max-w-5xl flex items-center justify-between">
+    <div
+      class="absolute top-8 left-[5%] right-[5%] h-1 bg-gray-300 rounded-full z-0"
+    ></div>
 
-        <span
-          class="mt-1 text-sm font-medium tracking-wide transition-all duration-300"
-          [ngClass]="{
-            'text-emerald-600': i <= current,
-            'text-gray-400': i > current
-          }"
-        >
-          {{ label }}
-        </span>
-      </li>
+    <div
+      class="absolute top-8 left-[5%] h-1 bg-blue-500 rounded-full z-10 transition-all duration-300"
+      [ngStyle]="{ width: progressWidth }"
+    ></div>
 
-      <li
-        *ngIf="i < steps.length - 1"
-        class="h-1 w-10 md:w-14 rounded transition-all duration-500 ease-in-out"
-        [ngClass]="{
-          'bg-emerald-500': i < current,
-          'bg-gray-300': i >= current
-        }"
-      ></li>
+    <ng-container *ngFor="let step of steps; let i = index">
+      <div class="flex flex-col items-center flex-1 z-20">
+        <div
+          class="h-10 w-10 rounded-full flex items-center justify-center transition-colors duration-300 mt-4 border-4"
+          [ngClass]="{
+            'bg-blue-500 text-white border-blue-500': i < current,
+            'bg-white text-blue-600 border-blue-500': i === current,
+            'bg-gray-300 text-gray-400 border-gray-300': i > current
+          }"
+          [class.cursor-pointer]="i <= maxCompleted"
+          [class.cursor-not-allowed]="i > maxCompleted"
+          (click)="goToStep(i)"
+        >
+          <span class="text-xs font-medium">{{ i + 1 }}</span>
+        </div>
+        <div class="mt-2 text-xs font-medium text-gray-700 text-center">
+          {{ step }}
+        </div>
+      </div>
     </ng-container>
-  </ol>
+  </div>
 </div>
