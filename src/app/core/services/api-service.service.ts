@@ -1,18 +1,9 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ApiServiceService {
-
-//   constructor() { }
-// }
-
 import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-// import { environment } from '../../environments/environment';
+import { UpdateUserService } from './update-user.service';
+import { AuthService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +16,11 @@ export class ApiServiceService {
   private loggedIn = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.loggedIn.asObservable();
 
-  constructor(private _httpclient: HttpClient) {
-    
-  }
+  constructor(
+    private _httpclient: HttpClient,
+    private _user: UpdateUserService,
+    private _auth: AuthService
+  ) {}
 
   post(url: string, data?: any) {
     const httpOptions = this.getHttpHeader();
@@ -157,7 +150,7 @@ export class ApiServiceService {
     if (this.getLocalStorage('LoggedInUser')) {
       currentUser = JSON.parse(this.getLocalStorage('LoggedInUser')!);
     }
-    // 
+    //
     // currentUser && currentUser.data && currentUser.token
     if (currentUser && currentUser.data != '') {
       // if (currentUser && currentUser.data && currentUser.token != '') {
@@ -169,27 +162,57 @@ export class ApiServiceService {
   }
 
   // checkLoginStatus() {
-  //   const url = 'users/check-login';
-  //   this._httpclient.get(url).subscribe((resp) => {
-  //     
-  //   });
+  //   return this._httpclient
+  //     .get(this.baseUrl + 'users/check-login')
+  //     .subscribe((e) => {
+
+  //       if (e) {
+  //         this.loggedIn.next(true);
+  //       } else {
+  //         this.loggedIn.next(false);
+  //       }
+  //     });
   // }
 
   checkLoginStatus() {
-    return this._httpclient
-      .get(this.baseUrl + 'users/check-login')
-      .subscribe((e) => {
+    const storedUser = this._auth.getUserInfo();
+    
+
+    if (!storedUser) {
+      this._user.clearUser();
+      return;
+    }
+
+    const token = this._auth.getAuthToken();
+    
+
+    if (!token) {
+      this._user.clearUser();
+      return;
+    }
+
+    const url = 'users/check-login';
+
+    this._httpclient.get<any>(url).subscribe({
+      next: (resp) => {
         
-        if (e) {
-          this.loggedIn.next(true);
-        } else {
-          this.loggedIn.next(false);
-        }
-      });
+        // if (resp.success) {
+        //   this._user.setUser(storedUser.user); // Restore signal
+        // } else {
+        // 
+        // this._user.clearUser(); // Expired token, logout
+        // localStorage.removeItem('LoggedInUser');
+        // }
+      },
+      error: () => {
+        // this._user.clearUser();
+        // localStorage.removeItem('LoggedInUser');
+      },
+    });
   }
 
   logout() {
-    localStorage.removeItem('token'); // optional, depends on your storage
-    this.loggedIn.next(false);
+    // localStorage.removeItem('token');
+    // this.loggedIn.next(false);
   }
 }

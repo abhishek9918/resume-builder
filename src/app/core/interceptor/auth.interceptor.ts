@@ -26,14 +26,15 @@ export class authInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     if (
       request.url.includes('/login_user') ||
-      request.url.includes('/register_user')
+      request.url.includes('/register_user') ||
+      request.url.includes('/google_login')
     ) {
       return next.handle(request);
     }
+
     const currentUser: any = localStorage.getItem('LoggedInUser');
     const JSonToken = JSON.parse(currentUser);
-    console.log(JSonToken);
-    console.log(currentUser);
+
     const token = JSonToken['token'];
     if (token) {
       request = request.clone({
@@ -46,7 +47,7 @@ export class authInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           localStorage.removeItem('LoggedInUser');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         }
         return throwError(error);
       })

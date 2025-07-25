@@ -1,0 +1,42 @@
+.jahuNy {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  color: rgb(130, 139, 162);
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+:is(input, button) svg {
+  fill: currentColor;
+}
+svg {
+  fill: currentColor;
+}
+
+// .eGhVMv {
+//   box-shadow: rgba(15, 56, 113, 0.32) 0px 0px 1px 0px,
+//     rgba(15, 56, 113, 0.02) 0px 6px 8px -2px,
+//     rgba(15, 56, 113, 0.18) 0px 16px 64px -8px;
+//   position: absolute;
+//   z-index: 551;
+//   right: 0px;
+//   top: calc(100% + 12px);
+//   padding: 0px;
+//   margin: 0px;
+//   width: 352px;
+//   border-radius: 16px;
+//   background-color: rgb(255, 255, 255);
+//   transform-origin: 100% 0px;
+//   animation: 0.25s ease 0s 1 normal forwards running fpfLyd;
+// }

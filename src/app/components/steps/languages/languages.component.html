@@ -2,7 +2,7 @@
   <div class="flex flex-wrap gap-2 mb-5">
     <button
       *ngFor="let lang of quickList"
-      (click)="quickSelect(lang)"
+      (click)="quickSelect($event, lang)"
       class="px-4 py-2 rounded-full border"
       [class.bg-blue-500]="selectedLanguage === lang"
       [class.text-white]="selectedLanguage === lang"
@@ -14,12 +14,12 @@
   <form
     *ngIf="adding || editingIndex !== null"
     [formGroup]="languageForm"
-    (ngSubmit)="save()"
+    (ngSubmit)="save($event)"
     class="flex flex-wrap items-center gap-3 mb-5"
   >
     <button
       *ngIf="!adding && editingIndex === null"
-      (click)="addAnother()"
+      (click)="addAnother($event)"
       class="text-blue-600 hover:underline mb-5"
     >
       + Add another language
@@ -58,7 +58,7 @@
     [ngClass]="{
       'opacity-50 cursor-not-allowed': adding || editingIndex !== null
     }"
-    (click)="addAnother()"
+    (click)="addAnother($event)"
   >
     + Add another language
   </button>

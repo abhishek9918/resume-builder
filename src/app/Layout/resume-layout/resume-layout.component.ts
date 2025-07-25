@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-resume-layout',
   // imports: [RouterOutlet, HeaderComponent, StepperComponent],
-  imports: [RouterOutlet, HeaderComponent, StepperComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, CommonModule],
   templateUrl: './resume-layout.component.html',
   styleUrl: './resume-layout.component.scss',
 })

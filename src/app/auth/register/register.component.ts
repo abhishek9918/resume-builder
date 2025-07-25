@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
 } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ApiServiceService } from '../../core/services/api-service.service';
+import { AuthService } from '../../core/services/auth-service.service';
+import { UpdateUserService } from '../../core/services/update-user.service';
 import {
   trigger,
   transition,
@@ -14,18 +19,11 @@ import {
   state,
   keyframes,
 } from '@angular/animations';
-import { Router, RouterLink } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { ApiServiceService } from '../../core/services/api-service.service';
-import { AuthService } from '../../core/services/auth-service.service';
-import { UpdateUserService } from '../../core/services/update-user.service';
-declare const google: any;
-
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
   animations: [
     trigger('logoAnimation', [
       state(
@@ -110,7 +108,26 @@ declare const google: any;
     ]),
   ],
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+// export class RegisterComponent {
+//   constructor(private router: Router) {}
+
+//   signIn() {
+//     this.router.navigate(['/login']);
+//   }
+
+//   signUp() {
+//     this.router.navigate(['/register']);
+//   }
+
+//   signUpWithProvider(provider: string) {
+//     alert(`Sign up with ${provider} clicked`);
+//   }
+
+//   closeAuthPage() {
+//     this.router.navigate(['/']);
+//   }
+// }
+export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
@@ -120,7 +137,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private _userUpdate: UpdateUserService
   ) {}
   isLogin: boolean = true;
-  loginFormGrp!: FormGroup;
+  registerFormGrp!: FormGroup;
   letterTransforms = [
     'translateX(-40px) translateY(20px)',
     'translateX(40px) translateY(-20px)',
@@ -133,37 +150,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ];
   state = 'initial';
 
-  ngAfterViewInit() {
-    console.log('Google API script loaded', google);
-    google?.accounts?.id?.initialize({
-      client_id:
-        '693595215851-jj5g2qs7b6ogvofq19uptldl5iqeh2ei.apps.googleusercontent.com', // from Google console
-      callback: this.handleCredentialResponse.bind(this),
-    });
-
-    google.accounts.id.renderButton(document.getElementById('g_id_onload'), {
-      theme: 'outline',
-      size: 'large',
-    });
-  }
-
-  handleCredentialResponse(response: any) {
-    const idToken = response.credential;
-
-    this._authService.googleLogin({ idToken }).subscribe({
-      next: (res: any) => {
-        localStorage.setItem('LoggedInUser', JSON.stringify(res));
-        this._router.navigate(['/app']);
-      },
-      error: (err) => {
-        console.error('Login failed', err);
-      },
-    });
-  }
-
-  triggerGoogleLogin(): void {
-    google.accounts.id.prompt(); // shows Google login popup
-  }
   ngOnInit() {
     setTimeout(() => {
       this.state = 'final';
@@ -171,7 +157,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.initForm();
   }
   initForm() {
-    this.loginFormGrp = this._fb.group({
+    this.registerFormGrp = this._fb.group({
+      name: [''],
       email: [''],
       password: [''],
     });
@@ -188,18 +175,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
   password: string = '';
 
   onSubmit(event?: Event) {
-    if (this.loginFormGrp.invalid) {
+    if (this.registerFormGrp.invalid) {
       this._toaster.error('Please fill in all required fields.');
       return;
     }
-    const loginForm = this.loginFormGrp.value;
-    this.postUser(loginForm);
+    const register = this.registerFormGrp.value;
+    this.postUser(register);
   }
 
   postUser(formData: any) {
     // const service = this.isSignUp
     // ? this._authService.createUser(formData)
-    const service = this._authService.login(formData);
+    const service = this._authService.createUser(formData);
 
     service.subscribe({
       next: (resp) => {
@@ -207,7 +194,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this._toaster.success(resp.message);
           this._userUpdate.setUser(resp.data);
           this._service.checkLoginStatus();
-          this._router.navigate(['/app']);
+          this._router.navigate(['/auth/login']);
         }
       },
       error: (error) => {

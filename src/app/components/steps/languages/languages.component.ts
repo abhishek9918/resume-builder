@@ -47,7 +47,8 @@ export class LanguagesComponent implements OnInit {
     this.adding = true;
   }
 
-  quickSelect(lang: string): void {
+  quickSelect(e: any, lang: string): void {
+    e.preventDefault();
     this.selectedLanguage = lang;
 
     this.languageForm?.get('language')?.setValue(lang);
@@ -57,7 +58,8 @@ export class LanguagesComponent implements OnInit {
     }
   }
 
-  save(): void {
+  save(e: any): void {
+    e.preventDefault();
     if (this.languageForm.invalid) return;
 
     const value = this.languageForm.value;
@@ -81,7 +83,8 @@ export class LanguagesComponent implements OnInit {
     this.resetEditor();
   }
 
-  addAnother(): void {
+  addAnother(e: any): void {
+    e.preventDefault();
     this.resetEditor();
   }
 

@@ -1,0 +1,57 @@
+// .neon-pulse {
+//   text-shadow: 0 0 5px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.6),
+//     0 0 20px rgba(0, 255, 255, 0.4);
+//   animation: pulse 2s infinite ease-in-out;
+// }
+// @keyframes pulse {
+//   0%,
+//   100% {
+//     text-shadow: 0 0 5px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.6),
+//       0 0 20px rgba(0, 255, 255, 0.4);
+//   }
+//   50% {
+//     text-shadow: 0 0 10px rgba(0, 255, 255, 1), 0 0 20px rgba(0, 255, 255, 0.8),
+//       0 0 30px rgba(0, 255, 255, 0.6);
+//   }
+// }
+
+// .modern-glow {
+//   text-shadow: 0 0 6px rgba(79, 70, 229, 0.4), 0 0 12px rgba(79, 70, 229, 0.2);
+//   transition: text-shadow 0.4s ease-in-out;
+// }
+// .modern-glow:hover {
+//   text-shadow: 0 0 10px rgba(79, 70, 229, 0.6), 0 0 16px rgba(79, 70, 229, 0.4);
+// }
+// @keyframes colorFlow {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   100% {
+//     background-position: 200% 50%;
+//   }
+// }
+// h1 {
+//   background-size: 200% auto;
+//   animation: colorFlow 4s linear infinite;
+// }
+
+.elegant-glow {
+  text-shadow: 0 0 5px rgba(124, 58, 237, 0.5), 0 0 10px rgba(124, 58, 237, 0.3);
+  transition: text-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.elegant-glow:hover {
+  text-shadow: 0 0 8px rgba(124, 58, 237, 0.7), 0 0 14px rgba(124, 58, 237, 0.5);
+  transform: scale(1.05);
+}
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 400% 50%;
+  }
+}
+h1 {
+  background-size: 400% auto;
+  animation: gradientFlow 6s linear infinite;
+}

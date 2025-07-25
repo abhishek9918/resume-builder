@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -9,10 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TagInputModule } from 'ngx-chips';
-import { TagModel } from '../../core/models/TagModel.model';
-import { filter, map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { StepperComponent } from '../../core/shared/stepper/stepper.component';
 import { BasicInfoComponent } from '../steps/basic-info/basic-info.component';
 import { ExperienceComponent } from '../steps/experience/experience.component';
@@ -22,6 +19,7 @@ import { PreviewTemplateComponent } from '../preview-template/preview-template.c
 import { ProjectsComponent } from '../steps/projects/projects.component';
 import { LanguagesComponent } from '../steps/languages/languages.component';
 import { HobbiesComponent } from '../steps/hobbies/hobbies.component';
+import { RegisterComponent } from '../../auth/register/register.component';
 
 @Component({
   selector: 'app-resume-form-component',
@@ -135,28 +133,26 @@ export class ResumeFormComponentComponent implements OnInit {
   }
 
   submit() {
-    this._router.navigate(['/final']);
-    // console.log(this.resumeFormGroup.value);
-    // if (this.resumeFormGroup.valid) {
-    //   console.log(this.resumeFormGroup.value);
-    //   // this._router.navigate(['/preview']);
-    // } else {
-    //   console.warn('Form invalid');
-    //   this.resumeFormGroup.markAllAsTouched();
-    // }
+    console.log('Submitting form...', this.resumeFormGroup.controls);
+    console.log('Form submitted:', this.resumeFormGroup.value);
+    if (this.resumeFormGroup.valid) {
+      this._router.navigate(['/preview']);
+    } else {
+      console.warn('Form invalid');
+      this.resumeFormGroup.markAllAsTouched();
+    }
   }
 
-  step = 7;
+  step = 0;
 
   goToStep(index: number) {
     this.step = index;
-    console.log();
   }
 
-  // onStepChange(step: number) {
-  //   this.currentStep = step;
-  // }
   onStepChange(step: number) {
+    console.log(
+      `Step changed to: ${step}, Max step reached: ${this.maxStepReached}`
+    );
     if (step <= this.maxStepReached) {
       this.step = step;
       this.currentStep = step;
@@ -167,6 +163,7 @@ export class ResumeFormComponentComponent implements OnInit {
     if (this.step < this.steps.length - 1) {
       this.step++;
       this.currentStep = this.step;
+
       if (this.step > this.maxStepReached) {
         this.maxStepReached = this.step;
       }
@@ -178,5 +175,15 @@ export class ResumeFormComponentComponent implements OnInit {
       this.step--;
       this.currentStep = this.step;
     }
+  }
+
+  isOpen = false;
+
+  openModal() {
+    this.isOpen = true;
+  }
+
+  closeModal() {
+    this.isOpen = false;
   }
 }

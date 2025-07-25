@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  OauthUrl = environment.apiUrl + '/users/google_login';
   baseUrl = environment.apiUrl + '/users/login_user';
   signUpUrl = environment.apiUrl + '/users/register_user';
   constructor(private _http: HttpClient, private _router: Router) {}
@@ -20,11 +21,10 @@ export class AuthService {
   //   return this._http.post<LoginResponse>(this.baseUrl, requestPayload);
   // }
   login(requestPayload: Login): Observable<logResponse> {
-    console.log(this.baseUrl);
     return this._http.post<logResponse>(this.baseUrl, requestPayload).pipe(
       map((response: logResponse) => {
-        // console.log(response.token, '=> :response.token');
-        // console.log(response.data, '=> :response.data');
+        //
+        //
         if (response && response.token && response.data) {
           this.setLoggedInUserDetails({
             token: response.token,
@@ -39,6 +39,26 @@ export class AuthService {
       })
     );
   }
+  googleLogin(requestPayload: Login): Observable<logResponse> {
+    return this._http.post<logResponse>(this.OauthUrl, requestPayload).pipe(
+      map((response: logResponse) => {
+        //
+        //
+        if (response && response.token && response.data) {
+          this.setLoggedInUserDetails({
+            token: response.token,
+            user: response.data,
+          });
+        }
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Login error:', error);
+        return throwError(error);
+      })
+    );
+  }
+
   // createUser(requestPayload: singUp): Observable<signUpResponse> {
   //
   //   return this._http.post<signUpResponse>(this.signUpUrl, requestPayload);
@@ -104,10 +124,11 @@ export class AuthService {
     const data = localStorage.getItem('LoggedInUser');
     if (data) {
       const parsedData = JSON.parse(data);
-      return parsedData; // Retrieve user info
+      return parsedData;
     }
     return null;
   }
+
   // getUserInfo() {
   //   const data = localStorage.getItem('LoggedInUser');
   //   if (data) {
@@ -123,7 +144,7 @@ export interface LoggedInUser {
   user_info: UserInfo;
 }
 export interface singUp {
-  password: string;
+  password?: string;
   email?: string;
   name?: string;
   grant_type?: string;
@@ -132,13 +153,14 @@ export interface singUp {
   client_secret?: string;
 }
 export interface Login {
-  password: string;
+  password?: string;
   email?: string;
   username?: string;
   grant_type?: string;
   scope?: string;
   client_id?: string;
   client_secret?: string;
+  idToken?: string;
 }
 export interface logResponse {
   success: boolean;

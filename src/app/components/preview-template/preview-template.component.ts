@@ -22,21 +22,10 @@ export class PreviewTemplateComponent {
   resumeData = fakeJson;
   data = fakeJson;
   resume = fakeJson;
-  // resumes = jsss;
 
   onDownloadClick() {
-    // if (this.authService.isLoggedIn()) {
-    this.downloadResume(); // your existing PDF generation function
-    // } else {
-    // Redirect to login page and store return URL
-    this._router.navigate(['/login'], {
-      queryParams: { returnUrl: '/preview' },
-    });
-    // }
+    this.downloadResume();
   }
 
-  downloadResume() {
-    // Existing code for generating/downloading PDF
-    console.log('Downloading...');
-  }
+  downloadResume() {}
 }

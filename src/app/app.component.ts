@@ -12,7 +12,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 @Component({
   selector: 'app-root',
   // imports: [HeaderComponent, RouterOutlet, ResumeLayoutComponent],
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

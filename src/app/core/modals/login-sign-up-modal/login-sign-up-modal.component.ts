@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { ApiServiceService } from '../../services/api-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth-service.service';
@@ -94,11 +93,10 @@ export class LoginSignUpModalComponent implements OnInit {
     const service = this.isSignUp
       ? this._authService.createUser(formData)
       : this._authService.login(formData);
-    console.log(service, 'service:');
+
     service.subscribe({
       next: (resp) => {
         if (resp) {
-          console.log(resp);
           this._toaster.success(resp.message);
           this._userUpdate.setUser(resp.data);
           this._service.checkLoginStatus();
@@ -106,15 +104,12 @@ export class LoginSignUpModalComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.log(error);
         this._toaster.error(error.message);
       },
     });
   }
   checkUserIsLoggedIn() {
     const url = 'users/check-login';
-    this._service.get(url).subscribe((resp) => {
-      console.log(resp);
-    });
+    this._service.get(url).subscribe((resp) => {});
   }
 }
