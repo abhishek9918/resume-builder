@@ -21,7 +21,6 @@ import {
   provideAnimations,
 } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -36,7 +35,6 @@ export const appConfig: ApplicationConfig = {
 
     BrowserAnimationsModule,
     DatePipe,
-    FontAwesomeModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: authInterceptor,

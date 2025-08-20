@@ -13,17 +13,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faClose,
-  faHome,
-  faTimes,
-  faBars,
-  faSignOut,
-  faInfoCircle,
-  faFile,
-  faLayerGroup,
-} from '@fortawesome/free-solid-svg-icons';
+
 import { ApiServiceService } from '../../services/api-service.service';
 import { UpdateUserService } from '../../services/update-user.service';
 import { ProjectLogoComponent } from '../project-logo/project-logo.component';
@@ -35,7 +25,6 @@ import { OptimizedClickOutsideDirective } from '../../directive/optimized-click-
   imports: [
     CommonModule,
     FormsModule,
-    FontAwesomeModule,
     OptimizedClickOutsideDirective,
     RouterLink,
     RouterLinkActive,
@@ -84,13 +73,9 @@ export class SidebarComponent {
   //     document.body.classList.remove('no-scroll');
   //   }
   // }
-  faBars = faBars;
-  faClose = faTimes; // Use faTimes for close icon to match common practice, ensure import
-  SIGNOUT = faSignOut;
-  INFO = faInfoCircle;
-  faLayerGroup = faLayerGroup;
+
   isMenuOpen = false;
-  fileIcon = faFile;
+
   isPopupOpen = false;
   // isMenuOpen = false;
   isUserMenuOpen = false;

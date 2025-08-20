@@ -9,19 +9,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-projects',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
 export class ProjectsComponent {
   constructor(private _fb: FormBuilder, private _router: Router) {}
-  faPlus = faPlus;
-  faMinus = faSubtract;
+
   @Input({ required: true }) parentForm!: FormGroup;
 
   get projectsArray(): FormArray {

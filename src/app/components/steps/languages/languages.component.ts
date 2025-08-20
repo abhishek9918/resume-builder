@@ -9,11 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 @Component({
   selector: 'app-languages',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './languages.component.html',
   styleUrl: './languages.component.scss',
 })

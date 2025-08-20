@@ -4,13 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth-service.service';
 import { ApiServiceService } from '../../services/api-service.service';
 import { UpdateUserService } from '../../services/update-user.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faInfo,
-  faInfoCircle,
-  faSign,
-  faSignOut,
-} from '@fortawesome/free-solid-svg-icons';
+
 import { ProjectLogoComponent } from '../project-logo/project-logo.component';
 
 export interface userDetails {
@@ -29,21 +23,13 @@ export interface User {
 
 @Component({
   selector: 'app-header',
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterLinkActive,
-    FontAwesomeModule,
-    ProjectLogoComponent,
-  ],
+  imports: [CommonModule, RouterLink, RouterLinkActive, ProjectLogoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   userData: userDetails | null = null;
-  SIGNOUT = faSignOut;
-  INFO = faInfoCircle;
 
   loggedInUser = signal<any>(null);
   constructor(

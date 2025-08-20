@@ -8,20 +8,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
 
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
 })
 export class ExperienceComponent {
-  faPlus = faPlus;
-  faMinus = faSubtract;
   constructor(private _fb: FormBuilder) {}
   @Input({ required: true }) parentForm!: FormGroup;
 
