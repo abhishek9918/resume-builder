@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, OnInit, signal } from '@angular/core';
+import { Component, effect, Input, input, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth-service.service';
 import { ApiServiceService } from '../../services/api-service.service';
@@ -11,6 +11,7 @@ import {
   faSign,
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
+import { ProjectLogoComponent } from '../project-logo/project-logo.component';
 
 export interface userDetails {
   isUserLoggedIn: boolean;
@@ -28,7 +29,13 @@ export interface User {
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterLink, RouterLinkActive, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    FontAwesomeModule,
+    ProjectLogoComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -50,11 +57,8 @@ export class HeaderComponent implements OnInit {
     const url = 'users/check-login';
     this.api.get(url).subscribe({
       next: (response: userDetails) => {
-        
         this.userData = response;
         this.isLoggedIn = response.isUserLoggedIn;
-        
-        
       },
       error: (error) => {
         console.error('Error checking login status:', error);

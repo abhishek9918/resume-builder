@@ -1,0 +1,23 @@
+<div class="flex flex-col items-center justify-center">
+  <div [class]="`flex space-x-2 ${customClass} font-extrabold tracking-wide`">
+    <span
+      *ngFor="let letter of logoLetters; let i = index"
+      [ngClass]="getLetterClass(i, letter)"
+    >
+      {{ letter }}
+    </span>
+  </div>
+
+  <div
+    [class]="`mt-1  ${customSubHr} rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-pink-400 animate-grow-from-center`"
+  ></div>
+
+  <h1
+    [class]=" `mt-2 ${customSubClass} text-blue-500 font-bold text-gray-800 animate-fade-up`"
+  >
+    <h2 class="text-blue-500 font-semibold italic animate-fade-up">
+      Your Story. Professionally Told
+    </h2>
+    <div></div>
+  </h1>
+</div>

@@ -12,7 +12,7 @@ export class NoPageComponent {
   redirectUser() {
     const token = localStorage.getItem('LoggedInUser');
     if (token) {
-      this.router.navigate(['/app']);
+      this.router.navigate(['/resume/builder']);
     } else {
       this.router.navigate(['/auth/login']);
     }

@@ -1,0 +1,62 @@
+<div
+  *ngIf="isDownloadModal"
+  @modalBackdrop
+  class="modal-overlay flex items-center justify-center"
+  (click)="onBackdropClick($event)"
+>
+  <div
+    @modalContent
+    (click)="stopPropagation($event)"
+    class="relative w-[94%] max-w-lg p-8 bg-[#121212] text-gray-200 border border-gray-800 rounded-xs shadow-2xl transform transition-all duration-300 scale-100"
+  >
+    <button
+      (click)="closePopup()"
+      class="absolute top-4 right-4 text-gray-400 text-2xl hover:text-red-400 transition"
+    >
+      &times;
+    </button>
+    <div class="text-left">
+      <h2 class="text-lg font-bold text-white">
+        {{ heading }}
+      </h2>
+      <h2 class="text-base font-medium mb-2 text-white">
+        {{ subHeading }}
+      </h2>
+    </div>
+
+    <form [formGroup]="downloadForm" (ngSubmit)="updateChanges()">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-base font-bold text-gray-300 my-2">
+            Title
+          </label>
+          <input
+            type="text"
+            formControlName="resumeName"
+            class="w-full px-4 py-3 bg-[#1e1e1e] border border-gray-700 rounded-lg text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all duration-300"
+          />
+          <p class="mt-1 text-sm text-gray-500">
+            Tip: Use simple names without numbers or spaces.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end gap-4">
+        <button
+          type="button"
+          (click)="closePopup()"
+          class="px-5 py-2.5 bg-gray-800 text-gray-300 rounded-full hover:bg-gray-700 transition duration-200"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-5 py-2.5 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 shadow-md transition duration-200"
+        >
+          save changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <app-login-sign-up-modal #loginAndSigIn /> -->

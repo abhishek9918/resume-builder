@@ -1,4 +1,7 @@
-<div class="p-6">
+<div>
+  <div>
+    <h1 class="heading1">Languagees</h1>
+  </div>
   <div class="flex flex-wrap gap-2 mb-5">
     <button
       *ngFor="let lang of quickList"
@@ -11,7 +14,7 @@
     </button>
   </div>
 
-  <form
+  <!-- <form
     *ngIf="adding || editingIndex !== null"
     [formGroup]="languageForm"
     (ngSubmit)="save($event)"
@@ -28,7 +31,15 @@
       <option value="" disabled>Select language</option>
       <option *ngFor="let lang of quickList" [value]="lang">{{ lang }}</option>
     </select>
-
+    <div
+      *ngIf="
+        languageForm.get('language')?.touched &&
+        languageForm.get('language')?.invalid
+      "
+      class="errorMsg"
+    >
+      Language is required.
+    </div>
     <select formControlName="level" class="p-2 border rounded w-60">
       <option value="" disabled>Select level</option>
       <option value="C2">Bilingual or Proficient (C2)</option>
@@ -38,7 +49,14 @@
       <option value="A2">Elementary (A2)</option>
       <option value="A1">Beginner (A1)</option>
     </select>
-
+    <span
+      *ngIf="
+        languageForm.get('level')?.touched && languageForm.get('level')?.invalid
+      "
+      class="errorMsg"
+    >
+      Level is required.
+    </span>
     <button
       type="button"
       (click)="cancel()"
@@ -50,6 +68,76 @@
     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
       {{ editingIndex === null ? "Save" : "Update" }}
     </button>
+  </form> -->
+  <form
+    *ngIf="adding || editingIndex !== null"
+    [formGroup]="languageForm"
+    (ngSubmit)="save($event)"
+    class="flex flex-wrap gap-5 mb-5"
+  >
+    <button
+      *ngIf="!adding && editingIndex === null"
+      (click)="addAnother($event)"
+      class="text-blue-600 hover:underline mb-5 w-full"
+    >
+      + Add another language
+    </button>
+
+    <!-- Language Dropdown + Error -->
+    <div class="flex flex-col">
+      <select formControlName="language" class="p-2 border rounded w-44">
+        <option value="" disabled>Select language</option>
+        <option *ngFor="let lang of quickList" [value]="lang">
+          {{ lang }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          languageForm.get('language')?.touched &&
+          languageForm.get('language')?.invalid
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Language is required.
+      </div>
+    </div>
+
+    <!-- Level Dropdown + Error -->
+    <div class="flex flex-col">
+      <select formControlName="level" class="p-2 border rounded w-60">
+        <option value="" disabled>Select level</option>
+        <option value="C2">Bilingual or Proficient (C2)</option>
+        <option value="C1">Advanced (C1)</option>
+        <option value="B2">Upper Intermediate (B2)</option>
+        <option value="B1">Intermediate (B1)</option>
+        <option value="A2">Elementary (A2)</option>
+        <option value="A1">Beginner (A1)</option>
+      </select>
+      <span
+        *ngIf="
+          languageForm.get('level')?.touched &&
+          languageForm.get('level')?.invalid
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Level is required.
+      </span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center gap-2 mb-auto">
+      <button
+        type="button"
+        (click)="cancel()"
+        class="px-4 py-2 border border-blue-500 text-blue-500 rounded"
+      >
+        Cancel
+      </button>
+
+      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
+        {{ editingIndex === null ? "Save" : "Update" }}
+      </button>
+    </div>
   </form>
 
   <button
@@ -62,8 +150,41 @@
   >
     + Add another language
   </button>
-
   <div class="space-y-3">
+    <div
+      *ngFor="let grp of languagesArray.controls; let i = index"
+      class="flex items-center justify-between p-3 constant-bg border border-gray-700 rounded-lg shadow-sm"
+    >
+      <div class="flex items-center gap-4">
+        <span class="font-medium text-gray-300">{{ i + 1 }}</span>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-100">
+            {{ grp.get("language")?.value }}
+          </h3>
+          <p class="text-sm text-gray-400">
+            {{ levelLabel(grp.get("level")?.value) }}
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button
+          (click)="edit(i, $event)"
+          class="p-1 hover:bg-gray-700 rounded text-gray-200 transition-colors"
+        >
+          ✏️
+        </button>
+        <button
+          (click)="delete(i, $event)"
+          class="p-1 hover:bg-gray-700 rounded text-gray-200 transition-colors"
+        >
+          🗑️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="space-y-3">
     <div
       *ngFor="let grp of languagesArray.controls; let i = index"
       class="flex items-center justify-between p-3 bg-gray-50 border rounded-lg shadow-sm"
@@ -89,5 +210,5 @@
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

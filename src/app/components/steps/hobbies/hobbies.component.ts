@@ -17,8 +17,8 @@ import { Observable, of, filter } from 'rxjs';
 })
 export class HobbiesComponent {
   @Input({ required: true }) parentForm!: FormGroup;
-  get skills(): FormControl {
-    return this.parentForm.get('hobbiesArry') as FormControl;
+  get hobbiesArray(): FormControl {
+    return this.parentForm.get('hobbiesArray') as FormControl;
   }
   onAdding(tag: any): Observable<any> {
     const confirm = window.confirm('Do you want to add this skill?');

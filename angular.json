@@ -23,14 +23,25 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              { "glob": "**/*", "input": "src/assets", "output": "assets" },
+              { "glob": "**/*", "input": "public", "output": "" }
             ],
-            "styles": ["src/styles.scss", "node_modules/ngx-toastr/toastr.css"],
-            "scripts": []
+            "styles": [
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/aos/dist/aos.css"
+            ],
+            "scripts": ["node_modules/aos/dist/aos.js"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/app/styles/bootstrap.min.css",
+                "./src/app/styles/_variables.scss",
+                "./src/app/styles/_typography.scss",
+                "./src/app/styles/_button.scss"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -57,13 +68,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.prod.ts",
-                  "with": "src/environments/environment.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"

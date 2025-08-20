@@ -1,0 +1,55 @@
+<div class="overlay" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+
+<div class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
+  <fa-icon [icon]="isMenuOpen ? faClose : faBars"></fa-icon>
+</div>
+
+<nav [class.active]="isMenuOpen" class="p-6 flex flex-col h-full">
+  <ul class="flex-grow">
+    <li class="!mb-16">
+      <!-- <app-project-logo
+        [customClass]="'text-base font-extrabold'"
+        [customSubClass]="'mt-3 text-xs'"
+        [customSubHr]="'h-1 mt-1 w-full'"
+      /> -->
+    </li>
+    <li>
+      <a
+        routerLink="/resume/builder"
+        routerLinkActive="current  "
+        class="w-full"
+      >
+        <fa-icon class="fas" [icon]="faLayerGroup"></fa-icon>
+        <span class="ml-4"> Builder </span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/resume/preview" routerLinkActive="current ">
+        <fa-icon class="fas" [icon]="fileIcon"></fa-icon>
+        <span class="ml-4"> Preview </span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="mt-auto relative">
+    <button class="user-btn" (click)="toggleUserMenu($event)">
+      <div class="avatar">A</div>
+      <span class="text-left">Abhishek Ojha</span>
+    </button>
+
+    <div
+      *ngIf="isUserMenuOpen"
+      clickOutside
+      (clickOutside)="(isUserMenuOpen)"
+      class="user-menu show animate-fade-in-up"
+    >
+      <div clickOutside (clickOutside)="close()">
+        <a (click)="logout($event)">Logout</a>
+      </div>
+    </div>
+
+    <div class="copyright text-center text-gray-500 text-sm">
+      © 2025 Your Company
+    </div>
+  </div>
+</nav>

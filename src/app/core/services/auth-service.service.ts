@@ -4,8 +4,9 @@ import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 // import { environment } from '../../../environments/environment';
-// import { environment } from '../../../environments/environment.prod';
-// import { environment } from '../../environments/environment';
+// import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,18 +14,13 @@ export class AuthService {
   OauthUrl = environment.apiUrl + '/users/google_login';
   baseUrl = environment.apiUrl + '/users/login_user';
   signUpUrl = environment.apiUrl + '/users/register_user';
-  constructor(private _http: HttpClient, private _router: Router) {}
-  // token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ.';
-  // baseUrl = environment.baseUrl + '/login_user';
-  // signUpUrl = environment.baseUrl + '/register_user';
-  // login(requestPayload: Login): Observable<LoginResponse> {
-  //   return this._http.post<LoginResponse>(this.baseUrl, requestPayload);
-  // }
+  constructor(private _http: HttpClient, private _router: Router) {
+    console.log(this.baseUrl, '<=== baseUrl');
+    console.log(this.signUpUrl, '<=== signUpUrl');
+  }
   login(requestPayload: Login): Observable<logResponse> {
     return this._http.post<logResponse>(this.baseUrl, requestPayload).pipe(
       map((response: logResponse) => {
-        //
-        //
         if (response && response.token && response.data) {
           this.setLoggedInUserDetails({
             token: response.token,
@@ -42,8 +38,6 @@ export class AuthService {
   googleLogin(requestPayload: Login): Observable<logResponse> {
     return this._http.post<logResponse>(this.OauthUrl, requestPayload).pipe(
       map((response: logResponse) => {
-        //
-        //
         if (response && response.token && response.data) {
           this.setLoggedInUserDetails({
             token: response.token,
@@ -59,21 +53,10 @@ export class AuthService {
     );
   }
 
-  // createUser(requestPayload: singUp): Observable<signUpResponse> {
-  //
-  //   return this._http.post<signUpResponse>(this.signUpUrl, requestPayload);
-  // }
   createUser(requestPayload: singUp): Observable<signUpResponse> {
     return this._http.post<signUpResponse>(this.signUpUrl, requestPayload).pipe(
       map((response: signUpResponse) => {
         if (response.success) {
-          //
-          //
-          // Store token and user data in localStorage
-          // this.setLoggedInUserDetails({
-          //   token: response.token,
-          //   user: response.data,
-          // });
         }
         return response;
       }),
@@ -83,29 +66,7 @@ export class AuthService {
       })
     );
   }
-  // login(formValue: Login): Observable<LoginResponse> {
-  //   const user = this.staticUser.find((user) => user.email === formValue.email && user.password === formValue.password);
-  //   if (user) {
-  //     const response: LoginResponse = {
-  //       statusCode: 200,
-  //       message: 'Login successful',
-  //       payload: {
-  //         access_token: this.token,
-  //         user_info: {
-  //           id: 1,
-  //           name: 'abc',
-  //           email: user.email,
-  //           role: user.role
-  //         },
-  //       },
-  //     };
-  //     return of(response);
-  //   } else {
-  //     return throwError(() => new Error('Invalid credentials'));
-  //   }
-  // }
   downloadResume(format: string, name: string) {
-    // Logic to fetch file from backend
     const url = `/api/download?format=${format}&name=${name}`;
     window.open(url, '_blank');
   }
@@ -116,7 +77,7 @@ export class AuthService {
     const data = localStorage.getItem('LoggedInUser');
     if (data) {
       const parsedData = JSON.parse(data);
-      return parsedData.token; // Retrieve the token
+      return parsedData.token;
     }
     return null;
   }
@@ -128,16 +89,6 @@ export class AuthService {
     }
     return null;
   }
-
-  // getUserInfo() {
-  //   const data = localStorage.getItem('LoggedInUser');
-  //   if (data) {
-  //     const user: LoginPayload = JSON.parse(data);
-  //     return user.user;
-  //   } else {
-  //     return null;
-  //   }
-  // }
 }
 export interface LoggedInUser {
   access_token: string;

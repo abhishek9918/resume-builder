@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  viewChild,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,9 +10,9 @@ import {
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { LoginSignUpModalComponent } from '../login-sign-up-modal/login-sign-up-modal.component';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth-service.service';
 import { ApiServiceService } from '../../services/api-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-resume-downlaod',
@@ -58,15 +52,17 @@ export class ResumeDownlaodComponent implements OnInit {
     private _router: Router,
     private fb: FormBuilder,
     private auth: AuthService,
-    private _service: ApiServiceService
+    private _service: ApiServiceService,
+    private _toaster: ToastrService
   ) {}
   downloadForm!: FormGroup;
 
   @ViewChild('OpenDownloadModal') OpenDownloadModal!: ElementRef;
   @ViewChild('loginAndSigIn') loginAndSigIn!: LoginSignUpModalComponent;
   ngOnInit(): void {
+    const userDetails = this.auth.getUserInfo();
+
     this.downloadForm = this.fb.group({
-      format: ['', Validators.required],
       resumeName: ['', Validators.required],
     });
   }
@@ -74,8 +70,16 @@ export class ResumeDownlaodComponent implements OnInit {
   isDownloadModal = false;
   selectedFormat = 'pdf';
   resumeName = '';
+  data: any;
+  openPopup(data?: any) {
+    this.data = data;
+    if (data.resumeName) {
+      this.downloadForm.patchValue({
+        resumeName: data.resumeName,
+      });
+    }
+    console.log(this.data, 'data in openPopup');
 
-  openPopup() {
     this.isDownloadModal = true;
   }
 
@@ -91,12 +95,30 @@ export class ResumeDownlaodComponent implements OnInit {
 
   downloadResume() {
     if (this.downloadForm.invalid) return;
-
-    const { format, resumeName } = this.downloadForm.value;
-    console.log(format, resumeName);
-    // this.checkUserIsLoggedIn();
+    const { resumeName } = this.downloadForm.value;
+    const data = {
+      ...this.data,
+      resumeName: resumeName,
+      userId: this.auth.getUserInfo().user._id,
+    };
+    this.postResume(data);
     this.isDownloadModal = false;
-    this.loginAndSigIn.openModal();
+  }
+  count = 0;
+  postResume(formData: FormData) {
+    console.log('called ', this.count + 1 + 'time');
+
+    const url = 'resumes/create-resume';
+    this._service.post(url, formData).subscribe({
+      next: (resp: any) => {
+        this._toaster.success('Resume posted successfully!');
+        this._router.navigate(['/resume/preview']);
+      },
+      error: (err: any) => {
+        console.error('Error posting resume:', err);
+        this._toaster.error('Failed to post resume. Please try again.');
+      },
+    });
   }
 
   checkUserIsLoggedIn() {

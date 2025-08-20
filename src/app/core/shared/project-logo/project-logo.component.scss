@@ -1,0 +1,48 @@
+@layer utilities {
+  .animate-letter-in {
+    animation: fadeLetterIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes fadeLetterIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-grow-from-center {
+    animation: growFromCenter 1.2s ease-out forwards;
+    transform-origin: center;
+  }
+
+  @keyframes growFromCenter {
+    0% {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 1.3s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

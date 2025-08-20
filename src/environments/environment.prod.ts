@@ -1,7 +1,7 @@
-// export const environment = {};
+import { Environment } from '../app/core/interface/environment.interface';
 
-export const environment = {
+export const environment: Environment = {
   production: true,
-  apiUrl: 'https://taskmanagement-production-0595.up.railway.app',
+  apiUrl: 'https://resume-builder-db-production.up.railway.app',
   deployedEnv: 'PRODUCTION ✅',
 };

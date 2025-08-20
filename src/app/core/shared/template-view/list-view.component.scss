@@ -1,0 +1,83 @@
+// .list:hover {
+//   background-color: hsl(var(--secondary) / 0.3);
+//   border-radius: 4px;
+// }
+
+.list:hover {
+  background-color: hsl(var(--secondary) / 0.3) !important;
+  border-radius: 4px;
+}
+
+.popup {
+  min-width: 8rem;
+  max-width: calc(100vw - 1rem);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 10000;
+  width: 100%;
+  display: none;
+}
+
+.group:hover .popup,
+.group:focus-within .popup,
+.group .popup[style*="display: block"] {
+  display: block;
+}
+
+.group .popup {
+  top: calc(100% + 0.5rem);
+  right: 0.5rem;
+  left: auto;
+  bottom: auto;
+}
+
+.group-last .popup {
+  bottom: calc(100% + 0.5rem);
+  top: auto;
+  right: 0.5rem;
+  left: auto;
+}
+
+.group-first .popup {
+  top: calc(100% + 0.5rem);
+  bottom: auto;
+  right: 0.5rem;
+  left: auto;
+}
+
+@media (max-width: 640px) {
+  .group .popup,
+  .group-last .popup,
+  .group-first .popup {
+    right: 0.5rem;
+    left: auto;
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+    max-width: calc(100vw - 1rem);
+  }
+
+  .group-last .popup {
+    bottom: calc(100% + 0.5rem);
+    top: auto;
+    right: 0.5rem;
+    left: auto;
+  }
+}
+
+.tabpanel-container {
+  overflow: visible !important;
+}
+
+.grid {
+  overflow: visible !important;
+}
+
+body:has(.popup[style*="display: block"]) {
+  overflow-x: hidden;
+}
+
+.popup {
+  box-sizing: border-box;
+  transform: translateX(0);
+}

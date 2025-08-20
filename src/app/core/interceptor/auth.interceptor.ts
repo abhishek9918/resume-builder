@@ -1,9 +1,3 @@
-// import { HttpInterceptorFn } from '@angular/common/http';
-
-// export const authInterceptor: HttpInterceptorFn = (req, next) => {
-//   return next(req);
-// };
-
 import { Injectable } from '@angular/core';
 import {
   HttpEvent,
@@ -14,12 +8,16 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-// import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service.service';
+import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class authInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private _toaster: ToastrService
+  ) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -45,7 +43,15 @@ export class authInterceptor implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
+        if (error.status === 401 || error.status === 403) {
+          localStorage.removeItem('LoggedInUser');
+          this.router.navigate(['/auth/login']);
+        } else if (error.status === 0) {
+          this._toaster.error(
+            'Network error: Please check your internet connection.',
+            'Error'
+          );
+
           localStorage.removeItem('LoggedInUser');
           this.router.navigate(['/auth/login']);
         }

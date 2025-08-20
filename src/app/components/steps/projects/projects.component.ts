@@ -6,6 +6,7 @@ import {
   FormBuilder,
   FormGroup,
   FormArray,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons';
@@ -28,9 +29,9 @@ export class ProjectsComponent {
   }
   newProject() {
     return this._fb.group({
-      title: [''],
-      duration: [''],
-      description: [''],
+      title: ['', Validators.required],
+      duration: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 

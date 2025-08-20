@@ -1,23 +1,13 @@
-<div class="h-screen w-screen flex bg-zinc-950 text-white">
+<!-- <div class="bg-zinc-950 h-screen w-screen flex text-white">
   <div
     class="relative flex w-full flex-col justify-center gap-y-8 px-12 sm:mx-auto sm:basis-[420px] sm:px-0 lg:basis-[480px] lg:px-12"
   >
     <div class="mb-8">
-      <div class="flex justify-center items-center h-32 py-6">
-        <h1
-          class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-cyan-500 hover:via-blue-500 hover:to-purple-500 transition-all duration-600 ease-in-out cursor-pointer"
-          @logoAnimation
-        >
-          <span
-            *ngFor="let char of 'Introvia'.split(''); let i = index"
-            @letterAnimation
-            [style.animationDelay]="i * 150 + 'ms'"
-            class="inline-block elegant-glow"
-          >
-            {{ char }}
-          </span>
-        </h1>
-      </div>
+      <app-project-logo
+        [customClass]="'text-5xl font-extrabold'"
+        [customSubClass]="'mt-3 text-base'"
+        [customSubHr]="'h-1 mt-1 w-56'"
+      />
     </div>
 
     <div class="space-y-8">
@@ -46,6 +36,7 @@
           ></a>
         </h6>
       </div>
+
       <div class="">
         <form
           [formGroup]="loginFormGrp"
@@ -54,7 +45,7 @@
         >
           <div class="w-full space-y-1">
             <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-60"
+              class="text-white text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-60"
               for=":rd:-form-item"
               >Email</label
             >
@@ -93,13 +84,16 @@
             </p>
           </div>
 
-          <div class="mt-4 flex items-center gap-x-4">
+          <div class="mt-4 flex items-center gap-x-2 w-full">
             <button
-              class="inline-flex items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-transform duration-200 focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-red-500 text-primary-foreground hover:bg-primary/80 h-9 px-5 flex-1"
+              name="submit"
               type="submit"
+              id="submit"
+              class="inline-flex items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-transform duration-200 focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-red-500 text-primary-foreground hover:bg-primary/80 h-9 px-5 flex-1"
             >
-              Sign in</button
-            ><a
+              <span>Sign in</span>
+            </button>
+            <a
               class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-auto px-4"
               >Forgot Password?</a
             >
@@ -113,45 +107,35 @@
       <span class="text-xs font-medium">or continue with</span>
       <hr class="flex-1" />
     </div>
-    <div class="grid grid-cols-2 gap-4">
-      <a
-        href="/api/auth/github"
-        class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/80 h-10 px-6 w-full !bg-[#222] !text-white hover:!bg-[#222]/80"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="1em"
-          height="1em"
-          fill="currentColor"
-          viewBox="0 0 256 256"
-          class="mr-3 size-4"
-        >
-          <path
-            d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
-          ></path></svg
-        >GitHub</a
+    <button
+      id="g_id_onload" id="g_id_onload"
+      class="flex items-center w-full py-3 px-6 rounded-lg bg-black text-gray-200 uppercase text-sm font-medium transition-all duration-300 shadow-lg hover:bg-zinc-900 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:scale-105 border border-zinc-800 hover:border-gray-500"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 256 262"
+        class="w-4 h-4 mr-3 scale-110"
       >
-      <a
-        id="g_id_onload"
-        data-client_id="693595215851-jj5g2qs7b6ogvofq19uptldl5iqeh2ei.apps.googleusercontent.com"
-        data-context="use"
-        data-login_uri="http://localhost:3132/users/login_user"
-        data-auto_select="true"
-        data-itp_support="true"
-        class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/80 h-10 px-6 w-full !bg-[#4285F4] !text-white hover:!bg-[#4285F4]/80"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="1em"
-          height="1em"
-          fill="currentColor"
-          viewBox="0 0 256 256"
-          class="mr-3 size-4"
-        >
-          <path
-            d="M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z"
-          ></path></svg
-        >Google</a
-      >
-    </div>
+        <path
+          fill="#4285F4"
+          d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+        />
+        <path
+          fill="#34A853"
+          d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+        />
+        <path
+          fill="#FBBC05"
+          d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+        />
+        <path
+          fill="#EB4335"
+          d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+        />
+      </svg>
+      Sign in with Google
+    </button>
+    <div #hiddenGoogleButtonContainer style="display: none"></div>
   </div>
 
   <div class="relative hidden lg:block lg:flex-1">
@@ -175,4 +159,247 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="flex h-screen w-screen">
+  <div
+    class="relative flex w-full flex-col justify-center gap-y-8 px-12 sm:mx-auto sm:basis-[420px] sm:px-0 lg:basis-[480px] lg:px-12"
+  >
+    <div class="flex items-center justify-between">
+      <a class="size-24" href="/" data-discover="true">
+        <img
+          src="/introvia-logo-transparent.png"
+          width="96"
+          height="96"
+          alt="Reactive Resume"
+          class="rounded-sm -ml-3 logo-dark dark:block"
+      /></a>
+      <div
+        class="right-0 space-x-2 text-right lg:absolute lg:p-12 lg:text-center"
+      >
+        <button
+          class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-secondary-foreground size-9"
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="radix-:r1f:"
+          data-state="closed"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M247.15,212.42l-56-112a8,8,0,0,0-14.31,0l-21.71,43.43A88,88,0,0,1,108,126.93,103.65,103.65,0,0,0,135.69,64H160a8,8,0,0,0,0-16H104V32a8,8,0,0,0-16,0V48H32a8,8,0,0,0,0,16h87.63A87.76,87.76,0,0,1,96,116.35a87.74,87.74,0,0,1-19-31,8,8,0,1,0-15.08,5.34A103.63,103.63,0,0,0,84,127a87.55,87.55,0,0,1-52,17,8,8,0,0,0,0,16,103.46,103.46,0,0,0,64-22.08,104.18,104.18,0,0,0,51.44,21.31l-26.6,53.19a8,8,0,0,0,14.31,7.16L148.94,192h70.11l13.79,27.58A8,8,0,0,0,240,224a8,8,0,0,0,7.15-11.58ZM156.94,176,184,121.89,211.05,176Z"
+            ></path>
+          </svg></button
+        ><button
+          class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-secondary-foreground size-9"
+        >
+          <div
+            class="cursor-pointer overflow-hidden"
+            style="width: 20px; height: 20px"
+          >
+            <div class="flex" style="transform: translateX(-20px)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="shrink-0"
+              >
+                <path
+                  d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"
+                ></path></svg
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="shrink-0"
+              >
+                <path
+                  d="M164,72a76.2,76.2,0,0,0-20.26,2.73,55.63,55.63,0,0,0-9.41-11.54l9.51-13.57a8,8,0,1,0-13.11-9.18L121.22,54A55.9,55.9,0,0,0,96,48c-.58,0-1.16,0-1.74,0L91.37,31.71a8,8,0,1,0-15.75,2.77L78.5,50.82A56.1,56.1,0,0,0,55.23,65.67L41.61,56.14a8,8,0,1,0-9.17,13.11L46,78.77A55.55,55.55,0,0,0,40,104c0,.57,0,1.15,0,1.72L23.71,108.6a8,8,0,0,0,1.38,15.88,8.24,8.24,0,0,0,1.39-.12l16.32-2.88a55.74,55.74,0,0,0,5.86,12.42A52,52,0,0,0,84,224h80a76,76,0,0,0,0-152ZM56,104a40,40,0,0,1,72.54-23.24,76.26,76.26,0,0,0-35.62,40,52.14,52.14,0,0,0-31,4.17A40,40,0,0,1,56,104ZM164,208H84a36,36,0,1,1,4.78-71.69c-.37,2.37-.63,4.79-.77,7.23a8,8,0,0,0,16,.92,58.91,58.91,0,0,1,1.88-11.81c0-.16.09-.32.12-.48A60.06,60.06,0,1,1,164,208Z"
+                ></path></svg
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                class="shrink-0"
+              >
+                <path
+                  d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="space-y-8">
+      <div class="space-y-1.5">
+        <h2 class="text-2xl font-semibold tracking-tight">
+          Sign in to your account
+        </h2>
+        <h6>
+          <span class="opacity-75">Don't have an account?</span
+          ><a
+            class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-auto px-1.5"
+            href="/auth/register"
+            data-discover="true"
+            >Create one now
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+              class="ml-1"
+            >
+              <path
+                d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+              ></path></svg
+          ></a>
+        </h6>
+      </div>
+      <div class="">
+        <form
+          class="flex flex-col gap-y-4"
+          [formGroup]="loginFormGrp"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="w-full space-y-1">
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-60"
+              for=":r1g:-form-item"
+              >Email</label
+            ><input
+              autocomplete="email"
+              class="flex h-9 w-full rounded border bg-transparent px-3 py-0.5 !text-sm ring-0 ring-offset-transparent transition-colors [appearance:textfield] placeholder:opacity-80 hover:bg-secondary/20 focus:border-primary focus:bg-secondary/20 focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:appearance-none file:border-0 file:bg-transparent file:pt-1 file:text-sm file:font-medium file:text-primary border-border lowercase"
+              placeholder="john.doe@example.com"
+              name="identifier"
+              id=":r1g:-form-item"
+              aria-invalid="false"
+              aria-describedby=":r1g:-form-item-description"
+              formControlName="email"
+            />
+            <p
+              id=":r1g:-form-item-description"
+              class="text-xs leading-relaxed opacity-60"
+            >
+              You can also enter your username.
+            </p>
+          </div>
+          <div class="w-full space-y-1">
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-60"
+              for=":r1h:-form-item"
+              >Password</label
+            ><input
+              formControlName="password"
+              type="password"
+              autocomplete="password"
+              class="flex h-9 w-full rounded border bg-transparent px-3 py-0.5 !text-sm ring-0 ring-offset-transparent transition-colors [appearance:textfield] placeholder:opacity-80 hover:bg-secondary/20 focus:border-primary focus:bg-secondary/20 focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:appearance-none file:border-0 file:bg-transparent file:pt-1 file:text-sm file:font-medium file:text-primary border-border"
+              name="password"
+              id=":r1h:-form-item"
+              aria-invalid="false"
+              aria-describedby=":r1h:-form-item-description"
+              value=""
+            />
+            <p
+              id=":r1h:-form-item-description"
+              class="text-xs leading-relaxed opacity-60"
+            >
+              Hold <code class="text-xs font-bold">Ctrl</code> to display your
+              password temporarily.
+            </p>
+          </div>
+          <div class="mt-4 flex items-center gap-x-4">
+            <button
+              class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/80 h-9 px-5 flex-1"
+              name="submit"
+              type="submit"
+            >
+              Sign in</button
+            ><a
+              class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-auto px-4"
+              href="/auth/forgot-password"
+              data-discover="true"
+              >Forgot Password?</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="flex items-center gap-x-4">
+      <hr class="flex-1" />
+      <span class="text-xs font-medium">or continue with</span>
+      <hr class="flex-1" />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <a
+        href="/api/auth/github"
+        class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/80 h-10 px-6 w-full !bg-[#222] !text-white hover:!bg-[#222]/80"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          viewBox="0 0 256 256"
+          class="mr-3 size-4"
+        >
+          <path
+            d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
+          ></path></svg
+        >GitHub</a
+      ><button
+        id="g_id_onload"
+        class="inline-flex scale-100 items-center justify-center rounded-sm text-sm font-medium ring-offset-background transition-[transform,background-color] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-95 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/80 h-10 px-6 w-full !bg-[#4285F4] !text-white hover:!bg-[#4285F4]/80"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1em"
+          height="1em"
+          fill="currentColor"
+          viewBox="0 0 256 256"
+          class="mr-3 size-4"
+        >
+          <path
+            d="M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z"
+          ></path></svg
+        >Google
+      </button>
+      <div #hiddenGoogleButtonContainer style="display: none"></div>
+    </div>
+  </div>
+  <div class="relative hidden lg:block lg:flex-1">
+    <img
+      width="1920"
+      height="1080"
+      alt="Open books on a table"
+      class="h-screen w-full object-cover object-center"
+      src="https://images.unsplash.com/photo-1599222848373-ce6b9ccd9a87?q=80&w=1116&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    />
+    <div
+      class="absolute bottom-5 right-5 z-10 bg-primary/30 px-4 py-2 text-xs font-medium text-primary-foreground backdrop-blur-sm"
+    >
+      <a
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href="https://unsplash.com/photos/Oaqk7qqNh_c"
+        >Photograph by Patrick Tomasso</a
+      >
+    </div>
+  </div>
 </div>
+
+@if (isLoading) {
+<app-loader></app-loader>
+}

@@ -88,13 +88,17 @@ export class LanguagesComponent implements OnInit {
     this.resetEditor();
   }
 
-  edit(idx: number): void {
+  edit(idx: number, event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
     const grp = this.languagesArray.at(idx) as FormGroup;
     this.editingIndex = idx;
     this.resetEditor(grp.value);
   }
 
-  delete(idx: number): void {
+  delete(idx: number, event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
     this.languagesArray.removeAt(idx);
     if (this.editingIndex === idx) this.cancel();
   }

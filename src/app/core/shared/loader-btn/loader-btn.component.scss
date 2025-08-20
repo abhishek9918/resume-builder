@@ -1,0 +1,41 @@
+.loader {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  width: fit-content;
+}
+
+.loader span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: wave 1.2s infinite ease-in-out;
+}
+
+.loader span:nth-child(1) {
+  background: #4285f4; /* Google Blue */
+  animation-delay: 0s;
+}
+.loader span:nth-child(2) {
+  background: #db4437; /* Google Red */
+  animation-delay: 0.2s;
+}
+.loader span:nth-child(3) {
+  background: #f4b400; /* Google Yellow */
+  animation-delay: 0.4s;
+}
+.loader span:nth-child(4) {
+  background: #0f9d58; /* Google Green */
+  animation-delay: 0.6s;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

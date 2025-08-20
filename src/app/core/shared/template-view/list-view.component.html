@@ -1,0 +1,105 @@
+<div
+  data-state="active"
+  data-orientation="horizontal"
+  role="tabpanel"
+  aria-labelledby="radix-:rh:-trigger-list"
+  id="radix-:rh:-content-list"
+  tabindex="0"
+  class="mt-3 focus-visible:outline-none focus-visible:ring-0 tabpanel-container"
+>
+  <div class="grid gap-y-2" [@listAnimation]>
+    <ng-container
+      *ngFor="
+        let resume of resumes;
+        let i = index;
+        let last = last;
+        let first = first
+      "
+    >
+      <span
+        data-state="closed"
+        class="even:bg-secondary/20 list relative"
+        [class.group-first]="first"
+        [class.group-last]="last"
+        [class.opened]="openedCardIndex === i"
+      >
+        <div
+          class="flex cursor-pointer items-center rounded p-4 transition-colors hover:bg-secondary/30 group"
+        >
+          <div class="flex w-full items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="flex size-5 items-center justify-center"></div>
+              <h4 class="w-[220px] truncate font-medium lg:w-[320px]">
+                {{ resume.resumeName }}
+              </h4>
+              <p class="hidden text-xs opacity-75 sm:block">
+                {{ resume.jobTitle }}
+              </p>
+            </div>
+            <div class="flex size-5 items-center justify-center relative group">
+              <button
+                [attr.data-index]="i"
+                class="inline-flex px-2.5 items-center justify-center rounded-sm text-sm font-medium transition focus:outline-none outline-none active:scale-95 disabled:pointer-events-none disabled:opacity-75 hover:bg-zinc-800 hover:text-gray-100 w-9 h-9 cursor-pointer"
+                type="button"
+                tabindex="0"
+                (click)="openModal(i)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"
+                  ></path>
+                </svg>
+              </button>
+              <div
+                *ngIf="openedCardIndex === i"
+                class="absolute z-[10000] min-w-[8rem] constant-bg border border-gray-700 rounded-md shadow-lg group-focus:block max-w-[200px] w-full animate-in fade-in-0 zoom-in-95 popup"
+              >
+                <div class="p-1 text-gray-200">
+                  <div
+                    (click)="actions('Open', resume)"
+                    class="px-2 py-1.5 text-sm hover:bg-gray-600 rounded cursor-pointer"
+                  >
+                    Open
+                  </div>
+                  <div
+                    (click)="actions('Rename', resume)"
+                    class="px-2 py-1.5 text-sm hover:bg-gray-600 rounded cursor-pointer"
+                  >
+                    Rename
+                  </div>
+                  <div
+                    (click)="actions('Duplicate', resume)"
+                    class="px-2 py-1.5 text-sm hover:bg-gray-600 rounded cursor-pointer"
+                  >
+                    Duplicate
+                  </div>
+                  <div
+                    (click)="actions('Lock', resume)"
+                    class="px-2 py-1.5 text-sm hover:bg-gray-600 rounded cursor-pointer"
+                  >
+                    Lock
+                  </div>
+                  <div class="-mx-1 my-1 h-px bg-gray-600"></div>
+                  <div
+                    (click)="actions('Delete', resume)"
+                    class="px-2 py-1.5 text-sm hover:bg-gray-600 rounded cursor-pointer"
+                  >
+                    Delete
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </span>
+    </ng-container>
+  </div>
+</div>
+<app-common-modal #modalOpen></app-common-modal>
+<app-delete-modal #deleteModal></app-delete-modal>

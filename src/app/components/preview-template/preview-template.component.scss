@@ -1,0 +1,22 @@
+/* Modern Font System */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --dark: #1e293b;
+  --medium: #64748b;
+  --light: #f8fafc;
+  --accent: #f59e0b;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: #f1f5f9;
+}
+
+.resume-container {
+  max-width: 850px;
+}

@@ -17,3 +17,12 @@
 // input:focus {
 //   box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
 // }
+/* Overlay for modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* full screen */
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); /* Safari support */
+  z-index: 9999; /* higher than sidebar */
+}

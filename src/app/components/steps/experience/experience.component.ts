@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons';
@@ -19,7 +20,6 @@ import { faPlus, faSubtract } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './experience.component.scss',
 })
 export class ExperienceComponent {
-  // @Input({ required: true }) experiencesArray!: FormArray;
   faPlus = faPlus;
   faMinus = faSubtract;
   constructor(private _fb: FormBuilder) {}
@@ -31,11 +31,11 @@ export class ExperienceComponent {
 
   private createExperienceGroup(): FormGroup {
     return this._fb.group({
-      company: [''],
-      position: [''],
-      startDate: [''],
+      company: ['', Validators.required],
+      position: ['', Validators.required],
+      startDate: ['', Validators.required],
       endDate: [''],
-      description: [''],
+      description: ['', [Validators.required, Validators.minLength(20)]],
     });
   }
 

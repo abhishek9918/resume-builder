@@ -8,7 +8,7 @@
 
 <div class="form-section">
   <section
-    class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 rounded-xl shadow-xl font-montserrat"
+    class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 rounded-xl font-montserrat scrollbar overflow-auto h-full max-h-[600px]"
   >
     <form [formGroup]="resumeFormGroup" (ngSubmit)="submit()">
       <ng-container [ngSwitch]="step">
@@ -41,7 +41,10 @@
           *ngSwitchCase="6"
           [parentForm]="resumeFormGroup"
         ></app-hobbies>
-        <app-preview-template *ngSwitchCase="7"></app-preview-template>
+        <app-preview-template
+          *ngSwitchCase="7"
+          [resumeData]="resumeFormGroup.value"
+        ></app-preview-template>
       </ng-container>
       <div class="flex justify-between mt-6">
         <button
@@ -71,3 +74,5 @@
     </form>
   </section>
 </div>
+
+<app-resume-downlaod #OpenDownloadModal></app-resume-downlaod>

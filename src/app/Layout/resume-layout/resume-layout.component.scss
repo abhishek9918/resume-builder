@@ -1,0 +1,29 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+app-sidebar {
+  width: 288px;
+  transition: width 0.3s ease;
+}
+
+.content {
+  flex: 1;
+  overflow-x: auto; /* keeps horizontal scroll only if content overflows */
+  min-width: 0; /* important to allow flex shrinking inside container */
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  app-sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+  }
+}

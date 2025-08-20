@@ -1,9 +1,7 @@
 <div [formGroup]="parentForm">
   <div class="mb-6">
     <div class="flex items-center justify-between mb-2 pl-2">
-      <h2 class="text-2xl sm:text-3xl font-bold text-blue-950 animate-fade-in">
-        Tell us about your education
-      </h2>
+      <h2 class="heading1">Tell us about your education</h2>
       <button
         type="button"
         (click)="addNewEducations()"
@@ -13,7 +11,7 @@
         <fa-icon [icon]="faPlus"></fa-icon>Add
       </button>
     </div>
-    <p class="text-[#0f4c9f] text-sm">
+    <p class="text-info">
       Enter your education experience so far, even if you are a current student
       or did not graduate.
     </p>
@@ -24,46 +22,63 @@
       *ngFor="let education of educationsArray.controls; let i = index"
     >
       <ng-container [formGroupName]="i">
-        <div
-          class="p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm mb-8"
-        >
+        <div class="education-card">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2"
-                >Institution</label
-              >
+              <label class="input-label">Institution</label>
               <input
                 formControlName="institution"
                 type="text"
                 placeholder="University of XYZ"
                 class="input-field"
               />
+              <div
+                *ngIf="
+                  education.get('institution')?.touched &&
+                  education.get('institution')?.invalid
+                "
+                class="errorMsg"
+              >
+                Institution is required.
+              </div>
             </div>
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2"
-                >Degree</label
-              >
+              <label class="input-label">Degree</label>
               <input
                 formControlName="degree"
                 type="text"
                 placeholder="B.Tech, Computer Science"
                 class="input-field"
               />
+              <div
+                *ngIf="
+                  education.get('degree')?.touched &&
+                  education.get('degree')?.invalid
+                "
+                class="errorMsg"
+              >
+                Degree is required.
+              </div>
             </div>
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2"
-                >Start Date</label
-              >
+              <label class="input-label">Start Date</label>
               <input
                 formControlName="startDate"
                 type="date"
                 class="input-field"
               />
+              <div
+                *ngIf="
+                  education.get('startDate')?.touched &&
+                  education.get('startDate')?.invalid
+                "
+                class="errorMsg"
+              >
+                Start Date is required.
+              </div>
             </div>
             <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2"
-                >End Date</label
-              >
+              <label class="input-label">End Date</label>
               <input
                 formControlName="endDate"
                 type="date"

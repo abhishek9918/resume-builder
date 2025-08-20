@@ -19,9 +19,16 @@ import {
   state,
   keyframes,
 } from '@angular/animations';
+import { ProjectLogoComponent } from '../../core/shared/project-logo/project-logo.component';
 @Component({
   selector: 'app-register',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
+    ProjectLogoComponent,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
   animations: [
@@ -108,25 +115,6 @@ import {
     ]),
   ],
 })
-// export class RegisterComponent {
-//   constructor(private router: Router) {}
-
-//   signIn() {
-//     this.router.navigate(['/login']);
-//   }
-
-//   signUp() {
-//     this.router.navigate(['/register']);
-//   }
-
-//   signUpWithProvider(provider: string) {
-//     alert(`Sign up with ${provider} clicked`);
-//   }
-
-//   closeAuthPage() {
-//     this.router.navigate(['/']);
-//   }
-// }
 export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
@@ -184,8 +172,6 @@ export class RegisterComponent implements OnInit {
   }
 
   postUser(formData: any) {
-    // const service = this.isSignUp
-    // ? this._authService.createUser(formData)
     const service = this._authService.createUser(formData);
 
     service.subscribe({

@@ -45,9 +45,6 @@ export class StepperComponent implements OnInit {
   }
 
   goToStep(index: number) {
-    // if (index <= this.maxCompleted) {
-    //   this.stepChange.emit(index);
-    // }
     if (index <= this.current || index === this.current + 1) {
       this.stepChange.emit(index);
     }
@@ -55,7 +52,9 @@ export class StepperComponent implements OnInit {
 
   get progressWidth(): string {
     if (this.steps.length <= 1) return '0%';
-    const progress = (this.current / (this.steps.length - 1)) * 90;
-    return `${progress}%`;
+    const containerWidthPercentage = window.innerWidth >= 640 ? 80 : 90;
+    const progress =
+      (this.current / (this.steps.length - 1)) * containerWidthPercentage;
+    return `${Math.min(progress, containerWidthPercentage)}%`;
   }
 }

@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus, faMinus, faSubtract } from '@fortawesome/free-solid-svg-icons';
@@ -27,9 +28,9 @@ export class EducationComponent {
   }
   private createEducationGroup(): FormGroup {
     return this._fb.group({
-      institution: [''],
-      degree: [''],
-      startDate: [''],
+      institution: ['', Validators.required],
+      degree: ['', Validators.required],
+      startDate: ['', Validators.required],
       endDate: [''],
     });
   }

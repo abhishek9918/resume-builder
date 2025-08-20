@@ -1,0 +1,58 @@
+.modal-overlay {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // // background: rgba(0, 0, 0, 0.7);
+  // background: hsl(var(--background) / 0.8);
+  // // backdrop-filter: blur(6px);
+  // // -webkit-backdrop-filter: blur(6px); /* Safari support */
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // z-index: 1000;
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8); /* semi-transparent */
+  backdrop-filter: blur(4px); /* blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  // background-color: hsl(var(--background));
+  background-color: hsl(var(--zinc-950)) !important;
+  transition: transform 0.3s ease-in-out;
+  // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  min-width: 300px;
+  border: gray !important;
+  //   @extend .constant-bg;
+}
+
+.modal-actions {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #e0245e;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c81d4e;
+}

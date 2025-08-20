@@ -1,17 +1,14 @@
 import { HttpClient, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, of, throwError } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { UpdateUserService } from './update-user.service';
 import { AuthService } from './auth-service.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiServiceService {
-  // baseUrl = 'https://ecommerce-api-ojn7.onrender.com';
-  // baseUrl = environment.baseUrl;
-  // baseUrl = 'http://localhost:1517/';
   baseUrl = environment.apiUrl + '/';
   private loggedIn = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.loggedIn.asObservable();
@@ -45,9 +42,8 @@ export class ApiServiceService {
   uploadFile(url: string, data?: any, isFileUpload: boolean = false) {
     let httpOptions: any = this.getHttpHeader();
 
-    // ⚡ File Upload ke liye headers remove kar do
     if (isFileUpload) {
-      httpOptions = {}; // Browser automatically set karega
+      httpOptions = {};
     }
 
     return this._httpclient.post(this.baseUrl + url, data, httpOptions).pipe(
@@ -82,7 +78,7 @@ export class ApiServiceService {
   get(url: string, params?: any) {
     const httpOptions = {
       ...this.getHttpHeader(),
-      params: params, // Attach query params here
+      params: params,
     };
 
     return this._httpclient.get(this.baseUrl + url, httpOptions).pipe(
@@ -95,7 +91,7 @@ export class ApiServiceService {
   }
 
   delete(url: string) {
-    const httpOptions = this.getHttpHeader(); // Attach headers if needed
+    const httpOptions = this.getHttpHeader();
 
     return this._httpclient.delete(this.baseUrl + url, httpOptions).pipe(
       map((response: any) => response),
@@ -150,33 +146,15 @@ export class ApiServiceService {
     if (this.getLocalStorage('LoggedInUser')) {
       currentUser = JSON.parse(this.getLocalStorage('LoggedInUser')!);
     }
-    //
-    // currentUser && currentUser.data && currentUser.token
     if (currentUser && currentUser.data != '') {
-      // if (currentUser && currentUser.data && currentUser.token != '') {
-      // if (currentUser && currentUser.data && currentUser.token != '') {
       return `Bearer ${currentUser['token']}`;
     } else {
       return '';
     }
   }
 
-  // checkLoginStatus() {
-  //   return this._httpclient
-  //     .get(this.baseUrl + 'users/check-login')
-  //     .subscribe((e) => {
-
-  //       if (e) {
-  //         this.loggedIn.next(true);
-  //       } else {
-  //         this.loggedIn.next(false);
-  //       }
-  //     });
-  // }
-
   checkLoginStatus() {
     const storedUser = this._auth.getUserInfo();
-    
 
     if (!storedUser) {
       this._user.clearUser();
@@ -184,7 +162,6 @@ export class ApiServiceService {
     }
 
     const token = this._auth.getAuthToken();
-    
 
     if (!token) {
       this._user.clearUser();
@@ -194,25 +171,10 @@ export class ApiServiceService {
     const url = 'users/check-login';
 
     this._httpclient.get<any>(url).subscribe({
-      next: (resp) => {
-        
-        // if (resp.success) {
-        //   this._user.setUser(storedUser.user); // Restore signal
-        // } else {
-        // 
-        // this._user.clearUser(); // Expired token, logout
-        // localStorage.removeItem('LoggedInUser');
-        // }
-      },
-      error: () => {
-        // this._user.clearUser();
-        // localStorage.removeItem('LoggedInUser');
-      },
+      next: (resp) => {},
+      error: () => {},
     });
   }
 
-  logout() {
-    // localStorage.removeItem('token');
-    // this.loggedIn.next(false);
-  }
+  logout() {}
 }

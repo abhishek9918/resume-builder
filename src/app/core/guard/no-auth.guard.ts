@@ -8,9 +8,12 @@ export class NoAuthGuard implements CanActivate {
   canActivate(): boolean {
     const userData = localStorage.getItem('LoggedInUser');
     if (userData) {
-      this.router.navigate(['/app']);
+      console.log('if');
+      this.router.navigate(['/']);
       return false;
     }
+    console.log('else');
+
     return true;
   }
 }

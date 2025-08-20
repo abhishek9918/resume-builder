@@ -1,34 +1,18 @@
 <header
-  class="bg-gradient-to-r from-blue-950 to-emerald-800 text-white py-4 shadow-2xl backdrop-blur-lg bg-opacity-90 sticky top-0 z-50"
+  class="bg-[#212428] text-white py-2 shadow-2xl backdrop-blur-lg bg-opacity-90 sticky top-0 z-50"
 >
   <div
     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between"
   >
-    <div class="flex items-center space-x-3">
-      <svg
-        class="w-8 h-8 text-emerald-400 animate-pulse"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-        ></path>
-      </svg>
-      <h1
-        class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white animate-fade-in"
-      >
-        Resume Builder
-      </h1>
-    </div>
+    <app-project-logo
+      [customClass]="'text-lg font-bold'"
+      [customSubClass]="'text-xs '"
+      [customSubHr]="'!h-0.5 mt-1  w-32'"
+    />
 
     <nav class="hidden md:flex space-x-10 text-base font-semibold items-center">
       <a
-        routerLink="/builder"
+        routerLink="/resume/builder"
         routerLinkActive="active"
         class="relative group hover:text-emerald-300 transition duration-300 ease-in-out transform hover:scale-105"
       >
@@ -39,7 +23,7 @@
       </a>
 
       <a
-        routerLink="/final"
+        routerLink="/resume/preview"
         routerLinkActive="active"
         class="relative group hover:text-emerald-300 transition duration-300 ease-in-out transform hover:scale-105"
       >
@@ -60,7 +44,6 @@
         ></span>
       </a>
 
-      <!-- <ng-container *ngIf="userData?.isUserLoggedIn"> -->
       @if (!userData?.isUserLoggedIn) {
       <a
         routerLink="/login"
@@ -156,10 +139,57 @@
               </button>
             </div>
           </div>
+          <!-- <div class="text-sm text-gray-800 space-y-3 font-medium">
+            <div>
+              <div class="text-base font-semibold">
+                {{ userData?.user?.name }}
+              </div>
+              <div class="text-sm text-gray-500">
+                {{ userData?.user?.email }}
+              </div>
+            </div>
+
+            <hr class="border-gray-200" />
+
+            <div class="space-y-2">
+              <div
+                class="flex items-center gap-2 hover:bg-gray-100 rounded-md cursor-pointer"
+              >
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8.56099 11.7007L15.9986 7.40661L23.4362 11.7007V20.2889L15.9986 24.583L8.56099 20.2889V11.7007ZM15.4986 5.61682C15.808 5.43819 16.1892 5.43819 16.4986 5.61682L24.7362 10.3728C25.0456 10.5514 25.2362 10.8816 25.2362 11.2388V20.7508C25.2362 21.1081 25.0456 21.4382 24.7362 21.6168L16.4986 26.3728C16.1892 26.5514 15.808 26.5514 15.4986 26.3728L7.26099 21.6168C6.95159 21.4382 6.76099 21.1081 6.76099 20.7508V11.2388C6.76099 10.8816 6.95159 10.5514 7.26099 10.3728L15.4986 5.61682ZM13.7892 14.6037L15.8986 13.3859C15.9605 13.3502 16.0367 13.3502 16.0986 13.3859L18.208 14.6037C18.2699 14.6395 18.308 14.7055 18.308 14.777V17.2127C18.308 17.2841 18.2699 17.3502 18.208 17.3859L16.0986 18.6037C16.0367 18.6395 15.9605 18.6395 15.8986 18.6037L13.7892 17.3859C13.7273 17.3502 13.6892 17.2841 13.6892 17.2127V14.777C13.6892 14.7055 13.7273 14.6395 13.7892 14.6037Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+                <span>Account Settings</span>
+              </div>
+              <div
+                class="flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md cursor-pointer"
+              >
+                <fa-icon [icon]="INFO" class="w-4 h-4"></fa-icon>
+
+                <span>FAQ</span>
+              </div>
+              <button
+                (click)="logout()"
+                class="w-full flex items-center gap-2 hover:bg-gray-100 p-2 rounded-md cursor-pointer"
+              >
+                <fa-icon [icon]="SIGNOUT" class="w-4 h-4"></fa-icon>
+                <span>Log Out</span>
+              </button>
+            </div>
+          </div> -->
         </div>
       </div>
       }
-      <!-- </ng-container> -->
     </nav>
 
     <div class="md:hidden">

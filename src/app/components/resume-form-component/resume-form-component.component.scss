@@ -1,11 +1,7 @@
 .stepper-fixed {
-  position: fixed;
-  top: 64px;
-  left: 0;
-  right: 0;
-  background-color: white;
+  background-color: hsl(var(--background));
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   padding: 16px 24px;
 }
 
@@ -14,5 +10,28 @@
   max-width: 64rem;
   margin-left: auto;
   margin-right: auto;
-  // margin-top: 16px;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1024px) {
+  .stepper-fixed {
+    width: auto;
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+
+  .form-section {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .stepper-fixed {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 16px;
+  }
+
+  .form-section {
+    margin-top: 120px;
+  }
 }
