@@ -35,12 +35,7 @@
             ],
             "scripts": ["node_modules/aos/dist/aos.js"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./src/app/styles/bootstrap.min.css",
-                "./src/app/styles/_variables.scss",
-                "./src/app/styles/_typography.scss",
-                "./src/app/styles/_button.scss"
-              ]
+              "includePaths": []
             }
           },
           "configurations": {
