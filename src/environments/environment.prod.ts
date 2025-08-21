@@ -5,3 +5,4 @@ export const environment: Environment = {
   apiUrl: 'https://resume-builder-db-production.up.railway.app',
   deployedEnv: 'PRODUCTION ✅',
 };
+// https://resume-builder-db-production.up.railway.app/
